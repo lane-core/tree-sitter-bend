@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "bend",
+      "camelcase": "Bend",
+      "scope": "source.bend",
+      "path": ".",
+      "file-types": ["bend"],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "tags": "queries/tags.scm",
+      "injections": "queries/injections.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for Bend2 language",
+    "authors": [{ "name": "Lane Biocini" }],
+    "links": {
+      "repository": "https://github.com/lane-core/tree-sitter-bend"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "node": true,
+    "rust": true
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "tree-sitter-bend",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for Bend2 language",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lane/tree-sitter-bend.git"
+  },
+  "scripts": {
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "generate": "tree-sitter generate",
+    "install": "node-gyp-build",
+    "prebuild": "prebuildify --napi --strip"
+  },
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "keywords": [
+    "tree-sitter",
+    "bend",
+    "bend2",
+    "syntax",
+    "parser"
+  ],
+  "author": "Lane",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.2.2",
+    "node-gyp-build": "^4.8.2"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.25.9",
+    "prebuildify": "^6.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.bend",
+      "file-types": [
+        "bend"
+      ],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "injections": "queries/injections.scm",
+      "tags": "queries/tags.scm"
+    }
+  ]
+}
