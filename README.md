@@ -1,17 +1,6 @@
-# Tree-sitter-bend
+# tree-sitter-bend
 
-Tree-sitter grammar and syntax highlighting for the Bend2 language.
-
-## Features
-
-- Complete Tree-sitter grammar for Bend2 syntax
-- Semantic highlighting with support for:
-  - Dependent types and type parameters
-  - Pattern matching and constructors
-  - Proof constructs (rewrite, absurd, etc.)
-  - Equality types and expressions
-  - Function definitions and calls
-  - Unicode symbols (∀, Σ)
+AI-generated tree-sitter grammar and syntax highlighting for the Bend2 language.
 
 ## Syntax Highlighting
 
