@@ -103,15 +103,17 @@ Enum eliminator with default
         (identifier)))))
 
 ================================================================================
-Superposition eliminator
+Simple enum eliminator
 ================================================================================
 
-λ{&L{,}: sup_body}
+λ{&Color: color_body}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (lambda_match
-    (sup_match
-      (identifier)
-      (identifier))))
+  (lambda_expression
+    (lambda_match_case
+      (enum_match
+        (enum_symbol
+          (identifier))
+        (identifier)))))

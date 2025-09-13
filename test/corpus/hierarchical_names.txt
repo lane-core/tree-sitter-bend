@@ -96,12 +96,11 @@ def f(x: Data/Vec(Nat, 3)) -> Data/Matrix(2, 3):
         (type_application
           (identifier)
           (natural_type)
-          (literal
+          (ERROR
             (integer_literal)))))
     return_type: (type_application
       (identifier)
-      (literal
-        (integer_literal))
-      (literal
+      (ERROR
+        (integer_literal)
         (integer_literal)))
     body: (identifier)))

@@ -44,6 +44,7 @@ type List<A: Set>:
       (field_declaration
         (identifier)
         (identifier))
+      (ERROR)
       (field_declaration
         (identifier)
         (type_application
@@ -73,6 +74,7 @@ type Pair<A, B>:
       (field_declaration
         (identifier)
         (identifier))
+      (ERROR)
       (field_declaration
         (identifier)
         (identifier)))))

@@ -99,8 +99,13 @@ Tilde superposition match
 --------------------------------------------------------------------------------
 
 (source_file
-  (tilde_match
-    (identifier)
-    (sup_match
+  (tilde_expression
+    (implicit_application
       (identifier)
-      (identifier))))
+      (application_expression
+        (implicit_application
+          (enum_symbol
+            (identifier))
+          (ERROR))
+        (ERROR)
+        (identifier)))))

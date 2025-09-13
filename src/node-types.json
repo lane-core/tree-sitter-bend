@@ -918,6 +918,32 @@
     }
   },
   {
+    "type": "as_pattern",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "assertion",
     "named": true,
     "fields": {},
@@ -4300,6 +4326,32 @@
     }
   },
   {
+    "type": "import_declaration",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "module_path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "module_path",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "lambda_expression",
     "named": true,
     "fields": {},
@@ -6351,6 +6403,21 @@
     }
   },
   {
+    "type": "module_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nat_match",
     "named": true,
     "fields": {},
@@ -7237,6 +7304,10 @@
           "named": true
         },
         {
+          "type": "as_pattern",
+          "named": true
+        },
+        {
           "type": "constructor_application",
           "named": true
         },
@@ -7266,6 +7337,10 @@
         },
         {
           "type": "tuple_pattern",
+          "named": true
+        },
+        {
+          "type": "type_annotated_pattern",
           "named": true
         }
       ]
@@ -7999,6 +8074,10 @@
         },
         {
           "type": "implicit_application",
+          "named": true
+        },
+        {
+          "type": "import_declaration",
           "named": true
         },
         {
@@ -10012,6 +10091,96 @@
     }
   },
   {
+    "type": "type_annotated_pattern",
+    "named": true,
+    "fields": {
+      "pattern": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "pattern",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean_type",
+            "named": true
+          },
+          {
+            "type": "empty_type",
+            "named": true
+          },
+          {
+            "type": "enum_type",
+            "named": true
+          },
+          {
+            "type": "equality_type",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "list_type",
+            "named": true
+          },
+          {
+            "type": "metavar",
+            "named": true
+          },
+          {
+            "type": "natural_type",
+            "named": true
+          },
+          {
+            "type": "numeric_type",
+            "named": true
+          },
+          {
+            "type": "parenthesized_type",
+            "named": true
+          },
+          {
+            "type": "self_type",
+            "named": true
+          },
+          {
+            "type": "sigma_simple",
+            "named": true
+          },
+          {
+            "type": "sigma_type",
+            "named": true
+          },
+          {
+            "type": "type_application",
+            "named": true
+          },
+          {
+            "type": "type_universe",
+            "named": true
+          },
+          {
+            "type": "unit_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "type_application",
     "named": true,
     "fields": {},
@@ -11383,6 +11552,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -11551,6 +11724,10 @@
     "named": false
   },
   {
+    "type": "^",
+    "named": false
+  },
+  {
     "type": "absurd",
     "named": false
   },
@@ -11564,6 +11741,10 @@
   },
   {
     "type": "any",
+    "named": false
+  },
+  {
+    "type": "as",
     "named": false
   },
   {
@@ -11621,6 +11802,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "import",
     "named": false
   },
   {
@@ -11730,6 +11915,10 @@
   },
   {
     "type": "{==}",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   },
   {

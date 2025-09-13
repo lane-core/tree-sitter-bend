@@ -57,8 +57,8 @@ f<T,U>
 --------------------------------------------------------------------------------
 
 (source_file
-  (type_application
-    (identifier)
+  (identifier)
+  (ERROR
     (identifier)
     (identifier)))
 

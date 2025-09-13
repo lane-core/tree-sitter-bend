@@ -40,18 +40,23 @@ match x { case @A: body; case @B: body }
 --------------------------------------------------------------------------------
 
 (source_file
-  (match_expression
-    (identifier)
-    (match_case
-      (pattern
-        (constructor_tag
-          (identifier)))
-      (identifier))
-    (match_case
-      (pattern
-        (constructor_tag
-          (identifier)))
-      (identifier))))
+  (ERROR
+    (implicit_application
+      (identifier)
+      (application_expression
+        (application_expression
+          (application_expression
+            (application_expression
+              (identifier)
+              (constructor_tag
+                (identifier)))
+            (ERROR)
+            (identifier))
+          (ERROR)
+          (constructor_tag
+            (identifier)))
+        (ERROR)
+        (identifier)))))
 
 ================================================================================
 No semicolon in colon-form match

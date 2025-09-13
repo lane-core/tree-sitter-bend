@@ -23,14 +23,16 @@ def pred(n: Nat) -> Nat:
       (identifier)
       (match_case
         (pattern
-          (nat_literal))
+          (literal
+            (nat_literal)))
         (literal
           (nat_literal)))
       (match_case
         (pattern
           (arithmetic_pattern
             (nat_literal)
-            (identifier)))
+            (pattern
+              (identifier))))
         (identifier)))))
 
 ================================================================================
@@ -60,21 +62,25 @@ def div2(n: Nat) -> Nat:
       (identifier)
       (match_case
         (pattern
-          (nat_literal))
+          (literal
+            (nat_literal)))
         (literal
           (nat_literal)))
       (match_case
         (pattern
-          (nat_literal))
+          (literal
+            (nat_literal)))
         (literal
           (nat_literal)))
       (match_case
         (pattern
           (arithmetic_pattern
             (nat_literal)
-            (identifier)))
-        (arithmetic_expression
-          (nat_literal)
+            (pattern
+              (identifier))))
+        (binary_expression
+          (literal
+            (nat_literal))
           (application_expression
             (identifier)
             (identifier)))))))
@@ -104,16 +110,19 @@ def mul2(n: Nat) -> Nat:
       (identifier)
       (match_case
         (pattern
-          (nat_literal))
+          (literal
+            (nat_literal)))
         (literal
           (nat_literal)))
       (match_case
         (pattern
           (arithmetic_pattern
             (nat_literal)
-            (identifier)))
-        (arithmetic_expression
-          (nat_literal)
+            (pattern
+              (identifier))))
+        (binary_expression
+          (literal
+            (nat_literal))
           (application_expression
             (identifier)
             (identifier)))))))
@@ -145,13 +154,7 @@ def complex(n: Nat) -> Nat:
       (identifier)
       (match_case
         (pattern
-          (nat_literal))
-        (literal
-          (nat_literal)))
-      (match_case
-        (pattern
-          (arithmetic_pattern
-            (nat_literal)
+          (literal
             (nat_literal)))
         (literal
           (nat_literal)))
@@ -159,13 +162,25 @@ def complex(n: Nat) -> Nat:
         (pattern
           (arithmetic_pattern
             (nat_literal)
-            (parenthesized_pattern
-              (arithmetic_pattern
-                (literal
-                  (nat_literal))
-                (identifier)))))
-        (arithmetic_expression
-          (nat_literal)
+            (pattern
+              (literal
+                (nat_literal)))))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (pattern
+              (tuple_pattern
+                (pattern
+                  (arithmetic_pattern
+                    (nat_literal)
+                    (pattern
+                      (identifier))))))))
+        (binary_expression
+          (literal
+            (nat_literal))
           (application_expression
             (identifier)
             (identifier)))))))

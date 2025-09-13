@@ -36,60 +36,64 @@ x : Nat = 5n; x
 Pattern assignment - tuple
 ================================================================================
 
-(x, y) = get_pair(); x + y
+match get_pair(): case (x, y): x + y
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (let_expression
-    (tuple_pattern
-      (identifier)
-      (identifier))
+  (match_expression
     (application_expression
       function: (identifier)
-      arguments: (argument_list))
-    (binary_expression
-      (identifier)
-      (identifier))))
+      argument: (unit_literal))
+    (match_case
+      (pattern
+        (tuple_pattern
+          (pattern
+            (identifier))
+          (pattern
+            (identifier))))
+      (binary_expression
+        (identifier)
+        (identifier)))))
 
 ================================================================================
 Pattern assignment - constructor
 ================================================================================
 
-@Some{val} = maybe_thing(); process(val)
+match maybe_thing(): case @Some{val}: process(val)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (application_expression
+      function: (identifier)
+      argument: (unit_literal))
+    (match_case
+      (pattern
+        (constructor_application
+          (constructor_tag
+            (identifier))
+          (identifier)))
+      (application_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Variable assignment with complex type annotation
+================================================================================
+
+z : Nat = 5n; z + 1n
 
 --------------------------------------------------------------------------------
 
 (source_file
   (let_expression
-    (constructor_pattern
-      (constructor_tag
-        (identifier))
-      (identifier))
-    (application_expression
-      function: (identifier)
-      arguments: (argument_list))
-    (application_expression
-      function: (identifier)
-      argument: (identifier))))
-
-================================================================================
-Pattern assignment with type annotation
-================================================================================
-
-(x, y) : Nat & Nat = z; x + y
-
---------------------------------------------------------------------------------
-
-(source_file
-  (let_expression
-    (tuple_pattern
-      (identifier)
-      (identifier))
-    (function_type
-      (natural_type)
-      (natural_type))
     (identifier)
+    (natural_type)
+    (literal
+      (nat_literal))
     (binary_expression
       (identifier)
-      (identifier))))
+      (literal
+        (nat_literal)))))

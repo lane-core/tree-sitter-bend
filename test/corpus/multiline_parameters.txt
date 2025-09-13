@@ -94,13 +94,14 @@ def fold
         (identifier)
         (function_type
           (identifier)
-          (identifier)
-          (identifier)
+          (ERROR
+            (identifier))
           (function_type
             (type_application
               (identifier)
               (identifier))
             (identifier))
+          (ERROR)
           (identifier))))
     return_type: (identifier)
     body: (identifier)))

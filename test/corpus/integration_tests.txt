@@ -81,7 +81,8 @@ type Vec<A: Set>(N: Nat) -> Set:
       (parameter
         (identifier)
         (natural_type)))
-    (type_universe)
+    (ERROR
+      (type_universe))
     (constructor_case
       (constructor_tag
         (identifier))
@@ -112,7 +113,7 @@ type Vec<A: Set>(N: Nat) -> Set:
         (equality_type
           (natural_type)
           (identifier)
-          (arithmetic_pattern
+          (binary_expression
             (literal
               (nat_literal))
             (identifier)))))))
@@ -139,18 +140,19 @@ def complex(n: Nat) -> Nat:
     return_type: (natural_type)
     body: (let_expression
       (identifier)
-      (lambda_match
-        (nat_match
-          (literal
-            (integer_literal))
-          (lambda_expression
-            (identifier)
-            (binary_expression
-              (literal
-                (integer_literal))
-              (application_expression
-                function: (identifier)
-                argument: (identifier))))))
+      (lambda_expression
+        (lambda_match_case
+          (nat_match
+            (literal
+              (integer_literal))
+            (lambda_expression
+              (identifier)
+              (binary_expression
+                (literal
+                  (integer_literal))
+                (application_expression
+                  (identifier)
+                  (identifier)))))))
       (match_expression
         (identifier)
         (match_case
@@ -158,25 +160,25 @@ def complex(n: Nat) -> Nat:
             (literal
               (nat_literal)))
           (application_expression
-            function: (identifier)
-            argument: (literal
+            (identifier)
+            (literal
               (nat_literal))))
         (match_case
           (pattern
             (arithmetic_pattern
-              (literal
-                (nat_literal))
-              (identifier)))
+              (nat_literal)
+              (pattern
+                (identifier))))
           (binary_expression
             (application_expression
-              function: (identifier)
-              argument: (arithmetic_pattern
+              (identifier)
+              (binary_expression
                 (literal
                   (nat_literal))
                 (identifier)))
             (application_expression
-              function: (identifier)
-              argument: (identifier))))))))
+              (identifier)
+              (identifier))))))))
 
 ================================================================================
 Proof term with rewrite and equality

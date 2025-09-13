@@ -34,20 +34,16 @@ Lambda with multiple parameters
 Lambda match for booleans
 ================================================================================
 
-λ{
-  True: 1
-  False: 0
-}
+λ{False: zero; True: one}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (lambda_match
-    (bool_match
-      (literal
-        (integer_literal))
-      (literal
-        (integer_literal)))))
+  (lambda_expression
+    (lambda_match_case
+      (bool_match
+        (identifier)
+        (identifier)))))
 
 ================================================================================
 Lambda match for unit

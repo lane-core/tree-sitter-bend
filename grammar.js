@@ -4,27 +4,29 @@
  * Supports all 67 AST Term constructors with proper operator precedence
  */
 
-// Precedence levels based on Bend2 parser analysis (18 levels)
+// Precedence levels based on Bend2 spec analysis (20 levels - exact match to spec.md)
 const PREC = {
   // Lowest precedence
-  ASSIGNMENT: 1,          // =, :=
-  TYPE_CHECK: 2,          // ::
-  PRODUCT_TYPE: 3,        // &
-  FUNCTION_TYPE: 4,       // ->
-  LIST_CONS: 5,          // <>
-  LOGICAL_OR: 6,         // or
-  LOGICAL_XOR: 7,        // xor
-  LOGICAL_AND: 8,        // and
-  EQUALITY: 9,           // ==, !=, ===, !==
-  COMPARISON: 10,        // <, >, <=, >=
-  BITWISE_SHIFT: 11,     // <<, >>
-  ADDITION: 12,          // +, -
-  MULTIPLICATION: 13,    // *, /, %
-  EXPONENTIATION: 14,    // **
-  SIGMA_DOT: 4,          // . in Σ-types (same as function type)
-  UNARY: 16,            // not, -, ~
-  APPLICATION: 17,       // function application (space-separated)
-  TIGHT_POSTFIX: 18,    // f(), f[], f{}, f<> (no whitespace)
+  ASSIGNMENT: 1,         // =, :=
+  TYPE_CHECK: 2,         // ::
+  SIGMA_DOT: 3,          // . (in Σ-types)
+  FUNCTION_TYPE: 4,      // ->
+  LOGICAL_OR: 5,         // ||
+  LOGICAL_AND: 6,        // &&
+  EQUALITY: 7,           // ==, !=, ===, !==
+  COMPARISON: 8,         // <, >, <=, >=
+  CONS: 9,               // <>
+  BITWISE_OR: 10,        // or
+  BITWISE_XOR: 11,       // ^, xor
+  BITWISE_AND: 12,       // and
+  SHIFT: 13,             // <<, >>
+  ADDITIVE: 14,          // +, -
+  MULTIPLICATIVE: 15,    // *, /, %
+  POWER: 16,             // **
+  UNARY: 17,             // not, -, +
+  APPLICATION: 18,       // function application (space-separated)
+  POSTFIX: 19,           // f(), f<T>(), Type[]
+  TIGHT_POSTFIX: 20,     // f{} (immediate brace)
   // Highest precedence
 };
 
@@ -56,6 +58,8 @@ module.exports = grammar({
     
     // Pattern conflicts
     [$.arithmetic_pattern, $.list_pattern],
+    [$.as_pattern, $.arithmetic_pattern],
+    [$.as_pattern, $.list_pattern],
     
     // Equality types (context-dependent disambiguation)
     [$.equality_type, $._expression],
@@ -80,11 +84,30 @@ module.exports = grammar({
     source_file: $ => repeat($._item),
 
     _item: $ => choice(
+      $.import_declaration,
       $.function_definition,
       $.type_definition,
       $.assertion,
       $.try_statement,
       $._expression,
+    ),
+
+    // ============================================================================
+    // IMPORT DECLARATIONS
+    // ============================================================================
+    
+    // Import declarations: import Path/To/Module as Alias
+    import_declaration: $ => seq(
+      'import',
+      field('module_path', $.module_path),
+      'as',
+      field('alias', $.identifier),
+    ),
+    
+    // Module paths use hierarchical identifiers with slashes
+    module_path: $ => seq(
+      $.identifier,
+      repeat(seq('/', $.identifier))
     ),
 
     // ============================================================================
@@ -666,27 +689,20 @@ module.exports = grammar({
 
     // Op2 constructor
     binary_expression: $ => choice(
-      // Exponentiation (right associative)
-      prec.right(PREC.EXPONENTIATION, seq($._expression, '**', $._expression)),
+      // Assignment (right associative) - lowest precedence
+      prec.right(PREC.ASSIGNMENT, seq($._expression, '=', $._expression)),
       
-      // Multiplication and division (left associative)
-      prec.left(PREC.MULTIPLICATION, seq($._expression, '*', $._expression)),
-      prec.left(PREC.MULTIPLICATION, seq($._expression, '/', $._expression)),
-      prec.left(PREC.MULTIPLICATION, seq($._expression, '%', $._expression)),
+      // Type check
+      prec.right(PREC.TYPE_CHECK, seq($._expression, '::', $._expression)),
       
-      // Addition and subtraction (left associative)
-      prec.left(PREC.ADDITION, seq($._expression, '+', $._expression)),
-      prec.left(PREC.ADDITION, seq($._expression, '-', $._expression)),
+      // Function type (right associative)
+      prec.right(PREC.FUNCTION_TYPE, seq($._expression, '->', $._expression)),
       
-      // Bitwise shifts
-      prec.left(PREC.BITWISE_SHIFT, seq($._expression, '<<', $._expression)),
-      prec.left(PREC.BITWISE_SHIFT, seq($._expression, '>>', $._expression)),
+      // Logical OR (left associative) - NEW
+      prec.left(PREC.LOGICAL_OR, seq($._expression, '||', $._expression)),
       
-      // Comparisons
-      prec.left(PREC.COMPARISON, seq($._expression, '<', $._expression)),
-      prec.left(PREC.COMPARISON, seq($._expression, '>', $._expression)),
-      prec.left(PREC.COMPARISON, seq($._expression, '<=', $._expression)),
-      prec.left(PREC.COMPARISON, seq($._expression, '>=', $._expression)),
+      // Logical AND (left associative) - NEW
+      prec.left(PREC.LOGICAL_AND, seq($._expression, '&&', $._expression)),
       
       // Equality
       prec.left(PREC.EQUALITY, seq($._expression, '==', $._expression)),
@@ -694,25 +710,40 @@ module.exports = grammar({
       prec.left(PREC.EQUALITY, seq($._expression, '===', $._expression)),
       prec.left(PREC.EQUALITY, seq($._expression, '!==', $._expression)),
       
-      // Logical operations
-      prec.left(PREC.LOGICAL_AND, seq($._expression, 'and', $._expression)),
-      prec.left(PREC.LOGICAL_XOR, seq($._expression, 'xor', $._expression)),
-      prec.left(PREC.LOGICAL_OR, seq($._expression, 'or', $._expression)),
+      // Comparisons
+      prec.left(PREC.COMPARISON, seq($._expression, '<', $._expression)),
+      prec.left(PREC.COMPARISON, seq($._expression, '>', $._expression)),
+      prec.left(PREC.COMPARISON, seq($._expression, '<=', $._expression)),
+      prec.left(PREC.COMPARISON, seq($._expression, '>=', $._expression)),
       
       // List cons (right associative) - Con constructor
-      prec.right(PREC.LIST_CONS, seq($._expression, '<>', $._expression)),
+      prec.right(PREC.CONS, seq($._expression, '<>', $._expression)),
       
-      // Function type (right associative)
-      prec.right(PREC.FUNCTION_TYPE, seq($._expression, '->', $._expression)),
+      // Bitwise OR
+      prec.left(PREC.BITWISE_OR, seq($._expression, 'or', $._expression)),
       
-      // Product type (right associative)
-      prec.right(PREC.PRODUCT_TYPE, seq($._expression, '&', $._expression)),
+      // Bitwise XOR
+      prec.left(PREC.BITWISE_XOR, seq($._expression, '^', $._expression)),
+      prec.left(PREC.BITWISE_XOR, seq($._expression, 'xor', $._expression)),
       
-      // Type check
-      prec.right(PREC.TYPE_CHECK, seq($._expression, '::', $._expression)),
+      // Bitwise AND
+      prec.left(PREC.BITWISE_AND, seq($._expression, 'and', $._expression)),
       
-      // Assignment (right associative)
-      prec.right(PREC.ASSIGNMENT, seq($._expression, '=', $._expression)),
+      // Bitwise shifts
+      prec.left(PREC.SHIFT, seq($._expression, '<<', $._expression)),
+      prec.left(PREC.SHIFT, seq($._expression, '>>', $._expression)),
+      
+      // Addition and subtraction (left associative)
+      prec.left(PREC.ADDITIVE, seq($._expression, '+', $._expression)),
+      prec.left(PREC.ADDITIVE, seq($._expression, '-', $._expression)),
+      
+      // Multiplication and division (left associative)
+      prec.left(PREC.MULTIPLICATIVE, seq($._expression, '*', $._expression)),
+      prec.left(PREC.MULTIPLICATIVE, seq($._expression, '/', $._expression)),
+      prec.left(PREC.MULTIPLICATIVE, seq($._expression, '%', $._expression)),
+      
+      // Exponentiation (right associative)
+      prec.right(PREC.POWER, seq($._expression, '**', $._expression)),
     ),
 
     // Op1 constructor
@@ -824,6 +855,8 @@ module.exports = grammar({
     // ============================================================================
 
     pattern: $ => choice(
+      $.as_pattern,
+      $.type_annotated_pattern,
       $.identifier,
       $.literal,
       $.constructor_tag,
@@ -835,6 +868,23 @@ module.exports = grammar({
       $.parenthesized_pattern,
     ),
 
+    // As-patterns: bind the whole match - pattern as name
+    as_pattern: $ => seq(
+      field('pattern', $.pattern),
+      'as',
+      field('name', $.identifier),
+    ),
+    
+    // Type annotated patterns: (x: Type)
+    type_annotated_pattern: $ => seq(
+      '(',
+      field('pattern', $.pattern),
+      ':',
+      field('type', $._type),
+      ')',
+    ),
+
+    // Arithmetic patterns: 1n + p (successor patterns for natural numbers)
     arithmetic_pattern: $ => seq(
       $.nat_literal,
       '+',

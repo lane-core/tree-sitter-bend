@@ -110,18 +110,19 @@ Tilde match
 (source_file
   (tilde_match
     (identifier)
-    (pattern
-      (constructor_tag
-        (identifier)))
-    (identifier)
-    (pattern
-      (constructor_application
-        (constructor_tag
-          (identifier))
-        (identifier)))
+    (constructor_tag
+      (identifier))
     (application_expression
-      function: (identifier)
-      argument: (identifier))))
+      function: (application_expression
+        function: (identifier)
+        argument: (implicit_application
+          (constructor_tag
+            (identifier))
+          (identifier)))
+      (ERROR)
+      argument: (application_expression
+        (identifier)
+        (identifier)))))
 
 ================================================================================
 Let expression

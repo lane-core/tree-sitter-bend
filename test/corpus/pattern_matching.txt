@@ -42,43 +42,51 @@ match a b:
 
 (source_file
   (match_expression
-    (identifier)
-    (identifier)
+    (application_expression
+      (identifier)
+      (identifier))
     (match_case
       (pattern
-        (literal
-          (nat_literal))
         (literal
           (nat_literal)))
-      (boolean_literal))
-    (match_case
       (pattern
-        (arithmetic_pattern
-          (literal
-            (nat_literal))
-          (identifier))
         (literal
           (nat_literal)))
-      (boolean_literal))
+      (literal
+        (boolean_literal)))
+    (match_case
+      (pattern
+        (arithmetic_pattern
+          (nat_literal)
+          (pattern
+            (identifier))))
+      (pattern
+        (literal
+          (nat_literal)))
+      (literal
+        (boolean_literal)))
     (match_case
       (pattern
         (literal
-          (nat_literal))
+          (nat_literal)))
+      (pattern
         (arithmetic_pattern
-          (literal
-            (nat_literal))
-          (identifier)))
-      (boolean_literal))
+          (nat_literal)
+          (pattern
+            (identifier))))
+      (literal
+        (boolean_literal)))
     (match_case
       (pattern
         (arithmetic_pattern
-          (literal
-            (nat_literal))
-          (identifier))
+          (nat_literal)
+          (pattern
+            (identifier))))
+      (pattern
         (arithmetic_pattern
-          (literal
-            (nat_literal))
-          (identifier)))
+          (nat_literal)
+          (pattern
+            (identifier))))
       (application_expression
         (identifier)
         (identifier)
@@ -105,9 +113,9 @@ match n:
     (match_case
       (pattern
         (arithmetic_pattern
-          (literal
-            (nat_literal))
-          (identifier)))
+          (nat_literal)
+          (pattern
+            (identifier))))
       (application_expression
         (identifier)
         (identifier)))))

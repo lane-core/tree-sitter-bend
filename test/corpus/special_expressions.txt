@@ -29,7 +29,7 @@ Fixed point expression
 --------------------------------------------------------------------------------
 
 (source_file
-  (fixpoint_expression
+  (fix_expression
     (identifier)
     (lambda_expression
       (identifier)
@@ -44,10 +44,11 @@ Fixed point expression
           (identifier)
           (application_expression
             (identifier)
-            (binary_expression
+            (application_expression
               (identifier)
-              (literal
-                (integer_literal)))))))))
+              (unary_expression
+                (literal
+                  (integer_literal))))))))))
 
 ================================================================================
 Trust expression
@@ -73,7 +74,7 @@ view(helper_function)
 (source_file
   (application_expression
     (view_expression
-      (hierarchical_name))
+      (identifier))
     (view_expression
       (identifier))))
 
@@ -129,4 +130,4 @@ def ignore<A>(x: A) -> Unit:
         (identifier)
         (identifier)))
     return_type: (unit_type)
-    body: (eraser)))
+    body: (era_expression)))

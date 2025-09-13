@@ -1,99 +1,149 @@
 ================================================================================
-Bitwise operators
+Bitwise XOR operator
 ================================================================================
 
-x ^ y
-x xor y
-x and y
-x or y
+a ^ b
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Bitwise XOR word operator  
+================================================================================
+
+a xor b
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Bitwise AND operator
+================================================================================
+
+a and b
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Bitwise OR operator
+================================================================================
+
+a or b
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Shift left operator
+================================================================================
+
 x << 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (literal
+      (integer_literal))))
+
+================================================================================
+Shift right operator
+================================================================================
+
 y >> 3
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
-    (application_expression
-      (application_expression
-        (application_expression
-          (application_expression
-            (binary_expression
-              (identifier)
-              (identifier))
-            (binary_expression
-              (identifier)
-              (identifier)))
-          (binary_expression
-            (identifier)
-            (identifier)))
-        (binary_expression
-          (identifier)
-          (identifier)))
-      (binary_expression
-        (identifier)
-        (literal
-          (integer_literal))))
-    (binary_expression
-      (identifier)
-      (literal
-        (integer_literal)))))
+  (binary_expression
+    (identifier)
+    (literal
+      (integer_literal))))
 
 ================================================================================
-Strict equality operators
+Strict equality operator
 ================================================================================
 
 x === y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Strict inequality operator
+================================================================================
+
 x !== y
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
-    (binary_expression
-      (identifier)
-      (identifier))
-    (binary_expression
-      (identifier)
-      (identifier))))
+  (binary_expression
+    (identifier)
+    (identifier)))
 
 ================================================================================
 Power operator
 ================================================================================
 
 x ** 2
-2 ** n
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
-    (binary_expression
-      (identifier)
-      (literal
-        (integer_literal)))
-    (binary_expression
-      (literal
-        (integer_literal))
-      (identifier))))
+  (binary_expression
+    (identifier)
+    (literal
+      (integer_literal))))
 
 ================================================================================
 Unary not operator
 ================================================================================
 
 not x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (unary_expression
+    (identifier)))
+
+================================================================================
+Unary not with parenthesized expression
+================================================================================
+
 not (x and y)
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
-    (unary_expression
-      (identifier))
-    (unary_expression
-      (parenthesized_expression
-        (binary_expression
-          (identifier)
-          (identifier))))))
+  (unary_expression
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))))
 
 ================================================================================
 Logical operators (&&, ||)

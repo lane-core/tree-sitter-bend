@@ -25,6 +25,10 @@
 "λ" @keyword.function
 "μ" @keyword.function
 
+; Import system
+"import" @keyword.import
+"as" @keyword.import
+
 ; Special expressions
 "use" @keyword
 "rewrite" @keyword
@@ -39,6 +43,8 @@
 ; Logical operators
 "and" @operator.logical
 "or" @operator.logical
+"||" @operator.logical
+"&&" @operator.logical
 "xor" @operator.logical
 "not" @operator.logical
 
@@ -73,6 +79,12 @@
   (identifier) @parameter)
 (type_parameter 
   (identifier) @type.parameter)
+
+; Import declarations
+(import_declaration
+  module_path: (module_path) @module)
+(import_declaration
+  alias: (identifier) @module)
 
 ; ============================================================================
 ; APPLICATIONS
@@ -184,6 +196,10 @@
 (list_match "<>" @operator.list)
 (pair_match "(,)" @punctuation.bracket)
 (equality_match "{==}" @constant.builtin)
+
+; Pattern features
+(as_pattern "as" @keyword.operator)
+(type_annotated_pattern ":" @operator.type)
 
 ; ============================================================================
 ; SPECIAL FEATURES

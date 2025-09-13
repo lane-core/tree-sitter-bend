@@ -144,21 +144,24 @@ type Vec<A: Set, N: Nat>:
       (field_declaration
         (identifier)
         (natural_type))
+      (ERROR)
       (field_declaration
         (identifier)
         (identifier))
+      (ERROR)
       (field_declaration
         (identifier)
         (type_application
           (identifier)
           (identifier)
           (identifier)))
+      (ERROR)
       (field_declaration
         (identifier)
         (equality_type
           (natural_type)
           (identifier)
-          (arithmetic_pattern
+          (binary_expression
             (literal
               (nat_literal))
             (identifier)))))))

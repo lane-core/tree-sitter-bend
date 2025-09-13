@@ -16,11 +16,11 @@ Unsigned integer literals (U64)
         (literal
           (integer_literal))
         (literal
-          (hex_literal)))
+          (integer_literal)))
       (literal
-        (hex_literal)))
+        (integer_literal)))
     (literal
-      (binary_literal))))
+      (integer_literal))))
 
 ================================================================================
 Signed integer literals (I64)
@@ -42,9 +42,9 @@ Signed integer literals (I64)
         (literal
           (integer_literal)))
       (literal
-        (hex_literal)))
+        (integer_literal)))
     (literal
-      (binary_literal))))
+      (integer_literal))))
 
 ================================================================================
 Float literals (F64)
