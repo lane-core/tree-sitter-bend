@@ -1,0 +1,161 @@
+================================================================================
+Multi-line function parameters
+================================================================================
+
+def app
+  ( A: Set
+  , B: Set
+  , a: A
+  , b: A
+  , f: A -> B
+  , e: A{a == b}
+  ) -> B{f(a) == f(b)}:
+  rewrite e
+  {==}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (type_universe))
+      (parameter
+        (identifier)
+        (type_universe))
+      (parameter
+        (identifier)
+        (identifier))
+      (parameter
+        (identifier)
+        (identifier))
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (identifier)))
+      (parameter
+        (identifier)
+        (equality_type
+          (identifier)
+          (identifier)
+          (identifier))))
+    return_type: (equality_type
+      (identifier)
+      (application_expression
+        (identifier)
+        (identifier))
+      (application_expression
+        (identifier)
+        (identifier)))
+    body: (rewrite_expression
+      (identifier)
+      (reflexivity_proof))))
+
+================================================================================
+Multi-line parameters with complex types
+================================================================================
+
+def fold
+  ( A: Set
+  , B: A -> Set
+  , P: Set
+  , w: W(A, B)
+  , F: all x:A k:(B(x) -> P) . P
+  ) -> P:
+  body
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (type_universe))
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (type_universe)))
+      (parameter
+        (identifier)
+        (type_universe))
+      (parameter
+        (identifier)
+        (type_application
+          (identifier)
+          (identifier)
+          (identifier)))
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (identifier)
+          (identifier)
+          (function_type
+            (type_application
+              (identifier)
+              (identifier))
+            (identifier))
+          (identifier))))
+    return_type: (identifier)
+    body: (identifier)))
+
+================================================================================
+Zero-argument function with parentheses
+================================================================================
+
+def main() -> Nat:
+  42n
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (natural_type)
+    body: (literal
+      (nat_literal))))
+
+================================================================================
+Generic function with multi-line params
+================================================================================
+
+def complex<T, U>
+  ( transform: T -> U
+  , items: T[]
+  , default: U
+  ) -> U[]:
+  body
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier))
+      (type_parameter
+        (identifier)))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (identifier)))
+      (parameter
+        (identifier)
+        (list_type
+          (identifier)))
+      (parameter
+        (identifier)
+        (identifier)))
+    return_type: (list_type
+      (identifier))
+    body: (identifier)))

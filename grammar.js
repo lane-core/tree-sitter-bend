@@ -54,6 +54,9 @@ module.exports = grammar({
     // Dependent pair/function type disambiguation
     [$.function_type, $.sigma_simple],
     
+    // Pattern conflicts
+    [$.arithmetic_pattern, $.list_pattern],
+    
     // Equality types (context-dependent disambiguation)
     [$.equality_type, $._expression],
     
@@ -77,7 +80,6 @@ module.exports = grammar({
     source_file: $ => repeat($._item),
 
     _item: $ => choice(
-      $.import_declaration,
       $.function_definition,
       $.type_definition,
       $.assertion,
@@ -86,17 +88,8 @@ module.exports = grammar({
     ),
 
     // ============================================================================
-    // IMPORTS AND MODULES
+    // ASSERTIONS AND TRY
     // ============================================================================
-
-    import_declaration: $ => seq(
-      'import',
-      $.module_path,
-      'as',
-      $.identifier,
-    ),
-
-    module_path: $ => sep1($.identifier, '/'),
     
     // Proof constructs
     assertion: $ => seq(
@@ -843,9 +836,9 @@ module.exports = grammar({
     ),
 
     arithmetic_pattern: $ => seq(
-      $.literal,
+      $.nat_literal,
       '+',
-      $.identifier,
+      $.pattern,
     ),
 
     tuple_pattern: $ => seq(
@@ -932,14 +925,20 @@ module.exports = grammar({
 
     integer_literal: $ => token(choice(
       /\d+/,
-      seq('+', /\d+/),
-      seq('-', /\d+/),
+      /\+\d+/,
+      /-\d+/,
+      /0x[0-9a-fA-F]+/,
+      /\+0x[0-9a-fA-F]+/,
+      /-0x[0-9a-fA-F]+/,
+      /0b[01]+/,
+      /\+0b[01]+/,
+      /-0b[01]+/,
     )),
     
     float_literal: $ => token(choice(
       /\d+\.\d+/,
-      seq('+', /\d+\.\d+/),
-      seq('-', /\d+\.\d+/),
+      /\+\d+\.\d+/,
+      /-\d+\.\d+/,
     )),
 
     character_literal: $ => token(seq(
@@ -996,7 +995,10 @@ module.exports = grammar({
     // IDENTIFIERS AND COMMENTS
     // ============================================================================
 
-    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_\/]*/,
+    identifier: $ => choice(
+      /[a-zA-Z_][a-zA-Z0-9_]*/,
+      /[a-zA-Z_][a-zA-Z0-9_]*(?:\/[a-zA-Z_][a-zA-Z0-9_]*)*/,
+    ),
 
     line_comment: $ => token(seq('#', /.*/)),
     

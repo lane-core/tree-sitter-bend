@@ -32,9 +32,11 @@ match x:
 Match with multiple scrutinees
 ================================================================================
 
-match x y:
-  case @True @False: 0
-  case @False @True: 1
+match a b:
+  case 0n 0n: True
+  case 1n+a 0n: False
+  case 0n 1n+b: False
+  case 1n+a 1n+b: eql(a, b)
 
 --------------------------------------------------------------------------------
 
@@ -44,22 +46,43 @@ match x y:
     (identifier)
     (match_case
       (pattern
-        (constructor_tag
-          (identifier)))
-      (pattern
-        (constructor_tag
-          (identifier)))
-      (literal
-        (integer_literal)))
+        (literal
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (boolean_literal))
     (match_case
       (pattern
-        (constructor_tag
-          (identifier)))
+        (arithmetic_pattern
+          (literal
+            (nat_literal))
+          (identifier))
+        (literal
+          (nat_literal)))
+      (boolean_literal))
+    (match_case
       (pattern
-        (constructor_tag
+        (literal
+          (nat_literal))
+        (arithmetic_pattern
+          (literal
+            (nat_literal))
           (identifier)))
-      (literal
-        (integer_literal)))))
+      (boolean_literal))
+    (match_case
+      (pattern
+        (arithmetic_pattern
+          (literal
+            (nat_literal))
+          (identifier))
+        (arithmetic_pattern
+          (literal
+            (nat_literal))
+          (identifier)))
+      (application_expression
+        (identifier)
+        (identifier)
+        (identifier)))))
 
 ================================================================================
 Match with arithmetic patterns

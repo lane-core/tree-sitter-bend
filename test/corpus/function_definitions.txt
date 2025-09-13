@@ -48,13 +48,16 @@ def id<A>(x: A) -> A:
 Zero-argument function
 ================================================================================
 
-def get_zero: 0n
+def get_zero() -> Nat:
+  0n
 
 --------------------------------------------------------------------------------
 
 (source_file
   (function_definition
     name: (identifier)
+    parameters: (parameters)
+    return_type: (natural_type)
     body: (literal
       (nat_literal))))
 

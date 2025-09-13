@@ -1,37 +1,40 @@
-; Bend2 Syntax Highlighting - Working Version
-; Provides comprehensive syntax highlighting for Bend2 dependent type language
+; Bend Syntax Highlighting
+; Based on canonical Bend2 syntax
 
 ; ============================================================================
 ; KEYWORDS
 ; ============================================================================
 
-; Handle 'def' keyword uniformly since Bend2 has unified syntax
-(function_definition "def" @keyword.function)
+; Function and type definitions
+"def" @keyword.function
 "type" @keyword.type
 "case" @keyword.conditional
-"import" @keyword.import
-"as" @keyword.import
+"assert" @keyword
+"try" @keyword
+
+; Control flow
 "if" @keyword.conditional
 "else" @keyword.conditional
 "elif" @keyword.conditional
 "match" @keyword.conditional
 "fork" @keyword.conditional
-"with" @keyword.storage.modifier
+"with" @keyword
+
+; Lambda and fixed point
 "lambda" @keyword.function
 "λ" @keyword.function
-"use" @keyword.storage.modifier
-"mu" @keyword.function
 "μ" @keyword.function
-"rewrite" @keyword.operator
-"trust" @keyword.operator
-"absurd" @keyword.operator
-"finally" @keyword.operator
+
+; Special expressions
+"use" @keyword
+"rewrite" @keyword
+"trust" @keyword
+"absurd" @keyword
+"finally" @keyword
+"return" @keyword.return
 "log" @keyword.function.builtin
 "view" @keyword.function.builtin
-"return" @keyword.control
 "enum" @keyword.type
-"ref" @keyword.storage.modifier
-"sub" @keyword.operator
 
 ; Logical operators
 "and" @operator.logical
@@ -62,10 +65,14 @@
 ; DEFINITIONS
 ; ============================================================================
 
-(function_definition (identifier) @function)
-(type_definition (identifier) @type.definition)
-(parameter (identifier) @parameter)
-(type_parameter (identifier) @type.parameter)
+(function_definition 
+  name: (identifier) @function.definition)
+(type_definition 
+  (identifier) @type.definition)
+(parameter 
+  (identifier) @parameter)
+(type_parameter 
+  (identifier) @type.parameter)
 
 ; ============================================================================
 ; APPLICATIONS
@@ -102,7 +109,6 @@
 "True" @constant.builtin.boolean
 "False" @constant.builtin.boolean
 (nat_literal) @number
-"0n" @number
 (integer_literal) @number
 (float_literal) @number.float
 (character_literal) @character
@@ -115,6 +121,7 @@
 "*" @constant.builtin
 (reflexivity_proof) @constant.builtin
 "{==}" @constant.builtin
+"finally" @constant.builtin
 
 ; ============================================================================
 ; OPERATORS
@@ -131,6 +138,8 @@
 "/" @operator.arithmetic
 "%" @operator.arithmetic
 "**" @operator.arithmetic
+"<<" @operator.bitwise
+">>" @operator.bitwise
 "<" @operator.comparison
 ">" @operator.comparison
 "<=" @operator.comparison
@@ -139,9 +148,7 @@
 "!=" @operator.equality
 "===" @operator.equality
 "!==" @operator.equality
-"<<" @operator.bitwise
-">>" @operator.bitwise
-"~" @operator.bitwise
+"~" @operator
 "<>" @operator.list
 "&" @operator.special
 
@@ -204,20 +211,23 @@
 
 (line_comment) @comment.line
 (block_comment) @comment.block
-(module_path (identifier) @namespace)
-(import_declaration "as" @keyword.import (identifier) @namespace)
 
 ; ============================================================================
 ; ADVANCED CONSTRUCTS
 ; ============================================================================
 
-(field_declaration (identifier) @property (_) @type)
+(field_declaration 
+  (identifier) @property 
+  (_) @type)
 (type_check "::" @operator.type)
 (log_expression "log" @function.builtin)
 (view_expression "view" @function.builtin)
 (return_expression "return" @keyword.control)
 (rewrite_expression "rewrite" @keyword.operator)
 (absurd_expression "absurd" @keyword.operator)
+(trust_expression "trust" @keyword)
+(use_expression "use" @keyword)
+(fix_expression "μ" @keyword.function)
 
 ; ============================================================================
 ; FALLBACK

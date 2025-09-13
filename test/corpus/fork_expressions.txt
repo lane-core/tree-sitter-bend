@@ -1,0 +1,69 @@
+================================================================================
+Simple fork expression
+================================================================================
+
+fork L: a else: b
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fork_expression
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Fork with elif
+================================================================================
+
+fork L: a elif: b else: c
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fork_expression
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Fork with multiple elifs
+================================================================================
+
+fork L: a elif: b elif: c elif: d else: e
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fork_expression
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Fork with complex expressions
+================================================================================
+
+fork MyLabel: 
+  compute(x)
+elif:
+  fallback(y)
+else:
+  default_value
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fork_expression
+    (identifier)
+    (application_expression
+      (identifier)
+      (identifier))
+    (application_expression
+      (identifier)
+      (identifier))
+    (identifier)))

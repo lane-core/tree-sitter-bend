@@ -907,11 +907,11 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "nat_literal",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "pattern",
           "named": true
         }
       ]
@@ -3841,6 +3841,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_expression",
     "named": true,
     "fields": {},
@@ -4289,25 +4294,6 @@
         },
         {
           "type": "view_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "import_declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "module_path",
           "named": true
         }
       ]
@@ -6365,21 +6351,6 @@
     }
   },
   {
-    "type": "module_path",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "nat_match",
     "named": true,
     "fields": {},
@@ -8028,10 +7999,6 @@
         },
         {
           "type": "implicit_application",
-          "named": true
-        },
-        {
-          "type": "import_declaration",
           "named": true
         },
         {
@@ -11600,10 +11567,6 @@
     "named": false
   },
   {
-    "type": "as",
-    "named": false
-  },
-  {
     "type": "assert",
     "named": false
   },
@@ -11657,15 +11620,7 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
-    "named": false
-  },
-  {
-    "type": "import",
     "named": false
   },
   {

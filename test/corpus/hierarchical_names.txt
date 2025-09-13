@@ -1,0 +1,107 @@
+================================================================================
+Hierarchical function names
+================================================================================
+
+def List/map<A, B>(xs: A[], f: A -> B) -> B[]:
+  match xs:
+    case []:
+      []
+    case x <> xs:
+      f(x) <> List/map<A, B>(xs, f)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier))
+      (type_parameter
+        (identifier)))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (list_type
+          (identifier)))
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (identifier))))
+    return_type: (list_type
+      (identifier))
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (list_pattern))
+        (empty_list))
+      (match_case
+        (pattern
+          (list_pattern
+            (pattern
+              (identifier))
+            (pattern
+              (identifier))))
+        (binary_expression
+          (application_expression
+            (identifier)
+            (identifier))
+          (application_expression
+            (identifier)
+            (identifier)
+            (identifier)
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Hierarchical name in application
+================================================================================
+
+Nat/add(x, y)
+List/fold<A, B>(f, init, xs)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (application_expression
+      (identifier)
+      (identifier)
+      (identifier))
+    (application_expression
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))))
+
+================================================================================
+Hierarchical name as type
+================================================================================
+
+def f(x: Data/Vec(Nat, 3)) -> Data/Matrix(2, 3):
+  x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (type_application
+          (identifier)
+          (natural_type)
+          (literal
+            (integer_literal)))))
+    return_type: (type_application
+      (identifier)
+      (literal
+        (integer_literal))
+      (literal
+        (integer_literal)))
+    body: (identifier)))

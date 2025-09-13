@@ -1,0 +1,132 @@
+================================================================================
+Finally as reflexivity proof
+================================================================================
+
+def proof(n: Nat) -> Nat{n == n}:
+  finally
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (equality_type
+      (natural_type)
+      (identifier)
+      (identifier))
+    body: (reflexivity_proof)))
+
+================================================================================
+Fixed point expression
+================================================================================
+
+μ f. lambda n. if n == 0n: 1 else: n * f(n - 1)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fixpoint_expression
+    (identifier)
+    (lambda_expression
+      (identifier)
+      (if_expression
+        (binary_expression
+          (identifier)
+          (literal
+            (nat_literal)))
+        (literal
+          (integer_literal))
+        (binary_expression
+          (identifier)
+          (application_expression
+            (identifier)
+            (binary_expression
+              (identifier)
+              (literal
+                (integer_literal)))))))))
+
+================================================================================
+Trust expression
+================================================================================
+
+trust dangerous_computation
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (trust_expression
+    (identifier)))
+
+================================================================================
+View expression
+================================================================================
+
+view(List/map)
+view(helper_function)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (view_expression
+      (hierarchical_name))
+    (view_expression
+      (identifier))))
+
+================================================================================
+Use binding
+================================================================================
+
+use x = compute_value;
+use_x_here
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (use_expression
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Log expression with string
+================================================================================
+
+log "Computing result" (x + y)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (log_expression
+    (literal
+      (string_literal))
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Eraser placeholder
+================================================================================
+
+def ignore<A>(x: A) -> Unit:
+  *
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (identifier)))
+    return_type: (unit_type)
+    body: (eraser)))

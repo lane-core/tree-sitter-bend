@@ -1,0 +1,111 @@
+================================================================================
+Bitwise operators
+================================================================================
+
+x ^ y
+x xor y
+x and y
+x or y
+x << 2
+y >> 3
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (application_expression
+      (application_expression
+        (application_expression
+          (application_expression
+            (binary_expression
+              (identifier)
+              (identifier))
+            (binary_expression
+              (identifier)
+              (identifier)))
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (binary_expression
+          (identifier)
+          (identifier)))
+      (binary_expression
+        (identifier)
+        (literal
+          (integer_literal))))
+    (binary_expression
+      (identifier)
+      (literal
+        (integer_literal)))))
+
+================================================================================
+Strict equality operators
+================================================================================
+
+x === y
+x !== y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (binary_expression
+      (identifier)
+      (identifier))
+    (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Power operator
+================================================================================
+
+x ** 2
+2 ** n
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (binary_expression
+      (identifier)
+      (literal
+        (integer_literal)))
+    (binary_expression
+      (literal
+        (integer_literal))
+      (identifier))))
+
+================================================================================
+Unary not operator
+================================================================================
+
+not x
+not (x and y)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (unary_expression
+      (identifier))
+    (unary_expression
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (identifier))))))
+
+================================================================================
+Logical operators (&&, ||)
+================================================================================
+
+x && y || z
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (binary_expression
+      (identifier)
+      (identifier))
+    (identifier)))

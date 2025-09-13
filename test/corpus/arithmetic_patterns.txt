@@ -1,0 +1,171 @@
+================================================================================
+Successor patterns with space
+================================================================================
+
+def pred(n: Nat) -> Nat:
+  match n:
+    case 0n:
+      0n
+    case 1n + p:
+      p
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (identifier)))
+        (identifier)))))
+
+================================================================================
+Double successor pattern
+================================================================================
+
+def div2(n: Nat) -> Nat:
+  match n:
+    case 0n:
+      0n
+    case 1n:
+      0n
+    case 2n + p:
+      1n + div2(p)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (identifier)))
+        (arithmetic_expression
+          (nat_literal)
+          (application_expression
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Successor in expression context
+================================================================================
+
+def mul2(n: Nat) -> Nat:
+  match n:
+    case 0n:
+      0n
+    case 1n + p:
+      2n + mul2(p)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (identifier)))
+        (arithmetic_expression
+          (nat_literal)
+          (application_expression
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Complex arithmetic patterns
+================================================================================
+
+def complex(n: Nat) -> Nat:
+  match n:
+    case 0n:
+      0n
+    case 1n + 0n:
+      1n
+    case 1n + (1n + p):
+      2n + complex(p)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (nat_literal))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (nat_literal)))
+        (literal
+          (nat_literal)))
+      (match_case
+        (pattern
+          (arithmetic_pattern
+            (nat_literal)
+            (parenthesized_pattern
+              (arithmetic_pattern
+                (literal
+                  (nat_literal))
+                (identifier)))))
+        (arithmetic_expression
+          (nat_literal)
+          (application_expression
+            (identifier)
+            (identifier)))))))
