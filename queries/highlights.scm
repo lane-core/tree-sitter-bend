@@ -5,9 +5,8 @@
 ; KEYWORDS
 ; ============================================================================
 
-; Handle 'def' keyword specifically in function and variable definitions
+; Handle 'def' keyword uniformly since Bend2 has unified syntax
 (function_definition "def" @keyword.function)
-(variable_definition "def" @keyword.storage)
 "type" @keyword.type
 "case" @keyword.conditional
 "import" @keyword.import

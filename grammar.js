@@ -43,6 +43,8 @@ module.exports = grammar({
     [$._type, $._expression, $.let_expression],
     [$._type, $.let_expression],
     [$.parenthesized_type, $.parenthesized_expression],
+    [$.function_definition, $._expression],
+    [$.function_definition, $.application_expression, $.binary_expression],
     
     // Application conflicts (context-dependent disambiguation needed)
     [$.application_expression, $.binary_expression],
@@ -87,7 +89,6 @@ module.exports = grammar({
       $.import_declaration,
       $.function_definition,
       $.type_definition,
-      $.variable_definition,
       $._expression,
     ),
 
@@ -108,36 +109,35 @@ module.exports = grammar({
     // ============================================================================
 
     function_definition: $ => choice(
-      // Function with type signature: def f : Type : body
-      seq(
+      // Function with parameters: def name(params) -> Type : body
+      prec(3, seq(
         'def',
-        $.identifier,
+        field('name', $.identifier),
+        optional($.type_parameters),
+        field('parameters', $.parameters),
+        optional(seq('->', field('return_type', $._type))),
+        ':',
+        field('body', $._expression),
+      )),
+      // Simple definition: def name : Type = value  
+      prec.dynamic(10, seq(
+        'def',
+        field('name', $.identifier),
         optional($.type_parameters),
         ':',
-        $._type,
-        ':',
-        $._expression,
-      ),
-      // Function with parameters: def f(x: A) -> B : body
-      seq(
+        field('type', $._type),
+        '=',
+        field('value', $._expression),
+      )),
+      // Zero-arg function: def name : body
+      prec(1, seq(
         'def',
-        $.identifier,
+        field('name', $.identifier),
         optional($.type_parameters),
-        optional($.parameters),
-        optional(seq('->', $._type)),
         ':',
-        $._expression,
-      ),
+        field('body', $._expression),
+      )),
     ),
-
-    variable_definition: $ => prec(1, seq(
-      'def',
-      $.identifier,
-      ':',
-      $._type,
-      '=',
-      $._expression,
-    )),
 
     type_definition: $ => seq(
       'type',
