@@ -918,6 +918,233 @@
     }
   },
   {
+    "type": "assertion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "absurd_expression",
+          "named": true
+        },
+        {
+          "type": "application_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_type",
+          "named": true
+        },
+        {
+          "type": "constructor_application",
+          "named": true
+        },
+        {
+          "type": "constructor_tag",
+          "named": true
+        },
+        {
+          "type": "empty_list",
+          "named": true
+        },
+        {
+          "type": "empty_type",
+          "named": true
+        },
+        {
+          "type": "enum_literal",
+          "named": true
+        },
+        {
+          "type": "enum_symbol",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "equality_type",
+          "named": true
+        },
+        {
+          "type": "era_expression",
+          "named": true
+        },
+        {
+          "type": "fix_expression",
+          "named": true
+        },
+        {
+          "type": "fork_expression",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_expression",
+          "named": true
+        },
+        {
+          "type": "implicit_application",
+          "named": true
+        },
+        {
+          "type": "lambda_expression",
+          "named": true
+        },
+        {
+          "type": "lambda_match",
+          "named": true
+        },
+        {
+          "type": "let_expression",
+          "named": true
+        },
+        {
+          "type": "list_literal",
+          "named": true
+        },
+        {
+          "type": "list_type",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "log_expression",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "metavar",
+          "named": true
+        },
+        {
+          "type": "natural_type",
+          "named": true
+        },
+        {
+          "type": "numeric_type",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_type",
+          "named": true
+        },
+        {
+          "type": "primitive_function",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reflexivity_proof",
+          "named": true
+        },
+        {
+          "type": "return_expression",
+          "named": true
+        },
+        {
+          "type": "rewrite_expression",
+          "named": true
+        },
+        {
+          "type": "self_type",
+          "named": true
+        },
+        {
+          "type": "sigma_simple",
+          "named": true
+        },
+        {
+          "type": "sigma_type",
+          "named": true
+        },
+        {
+          "type": "substitution",
+          "named": true
+        },
+        {
+          "type": "superposition",
+          "named": true
+        },
+        {
+          "type": "tilde_expression",
+          "named": true
+        },
+        {
+          "type": "tilde_match",
+          "named": true
+        },
+        {
+          "type": "trust_expression",
+          "named": true
+        },
+        {
+          "type": "tuple_expression",
+          "named": true
+        },
+        {
+          "type": "type_application",
+          "named": true
+        },
+        {
+          "type": "type_check",
+          "named": true
+        },
+        {
+          "type": "type_universe",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
+          "type": "unit_type",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        },
+        {
+          "type": "view_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_expression",
     "named": true,
     "fields": {},
@@ -6153,11 +6380,6 @@
     }
   },
   {
-    "type": "nat_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "nat_match",
     "named": true,
     "fields": {},
@@ -7733,6 +7955,10 @@
           "named": true
         },
         {
+          "type": "assertion",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -7910,6 +8136,10 @@
         },
         {
           "type": "trust_expression",
+          "named": true
+        },
+        {
+          "type": "try_statement",
           "named": true
         },
         {
@@ -9124,6 +9354,233 @@
     "fields": {},
     "children": {
       "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "absurd_expression",
+          "named": true
+        },
+        {
+          "type": "application_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_type",
+          "named": true
+        },
+        {
+          "type": "constructor_application",
+          "named": true
+        },
+        {
+          "type": "constructor_tag",
+          "named": true
+        },
+        {
+          "type": "empty_list",
+          "named": true
+        },
+        {
+          "type": "empty_type",
+          "named": true
+        },
+        {
+          "type": "enum_literal",
+          "named": true
+        },
+        {
+          "type": "enum_symbol",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "equality_type",
+          "named": true
+        },
+        {
+          "type": "era_expression",
+          "named": true
+        },
+        {
+          "type": "fix_expression",
+          "named": true
+        },
+        {
+          "type": "fork_expression",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_expression",
+          "named": true
+        },
+        {
+          "type": "implicit_application",
+          "named": true
+        },
+        {
+          "type": "lambda_expression",
+          "named": true
+        },
+        {
+          "type": "lambda_match",
+          "named": true
+        },
+        {
+          "type": "let_expression",
+          "named": true
+        },
+        {
+          "type": "list_literal",
+          "named": true
+        },
+        {
+          "type": "list_type",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "log_expression",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "metavar",
+          "named": true
+        },
+        {
+          "type": "natural_type",
+          "named": true
+        },
+        {
+          "type": "numeric_type",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_type",
+          "named": true
+        },
+        {
+          "type": "primitive_function",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reflexivity_proof",
+          "named": true
+        },
+        {
+          "type": "return_expression",
+          "named": true
+        },
+        {
+          "type": "rewrite_expression",
+          "named": true
+        },
+        {
+          "type": "self_type",
+          "named": true
+        },
+        {
+          "type": "sigma_simple",
+          "named": true
+        },
+        {
+          "type": "sigma_type",
+          "named": true
+        },
+        {
+          "type": "substitution",
+          "named": true
+        },
+        {
+          "type": "superposition",
+          "named": true
+        },
+        {
+          "type": "tilde_expression",
+          "named": true
+        },
+        {
+          "type": "tilde_match",
+          "named": true
+        },
+        {
+          "type": "trust_expression",
+          "named": true
+        },
+        {
+          "type": "tuple_expression",
+          "named": true
+        },
+        {
+          "type": "type_application",
+          "named": true
+        },
+        {
+          "type": "type_check",
+          "named": true
+        },
+        {
+          "type": "type_universe",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
+          "type": "unit_type",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        },
+        {
+          "type": "view_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "try_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -11147,6 +11604,10 @@
     "named": false
   },
   {
+    "type": "assert",
+    "named": false
+  },
+  {
     "type": "block_comment",
     "named": true,
     "extra": true
@@ -11233,8 +11694,8 @@
     "named": false
   },
   {
-    "type": "n",
-    "named": false
+    "type": "nat_literal",
+    "named": true
   },
   {
     "type": "natural_type",
@@ -11274,6 +11735,10 @@
   },
   {
     "type": "trust",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {

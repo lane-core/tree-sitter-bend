@@ -1,0 +1,67 @@
+================================================================================
+If condition with colon (blocking : in condition)
+================================================================================
+
+if x: y else: z
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_expression
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Tilde expression with braces (blocking { in term)
+================================================================================
+
+~ term { False: f; True: t }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tilde_match
+    (identifier)
+    (bool_match
+      (identifier)
+      (identifier))))
+
+================================================================================
+Fork with colon (blocking : in label)
+================================================================================
+
+fork L: a elif: b else: c
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fork_expression
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Match with colon (blocking : in scrutinee)
+================================================================================
+
+match x:
+  case @A: body1
+  case @B: body2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))))

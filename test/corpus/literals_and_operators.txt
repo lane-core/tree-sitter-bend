@@ -45,12 +45,14 @@ Integer literals
 --------------------------------------------------------------------------------
 
 (source_file
-  (literal
-    (integer_literal))
-  (literal
-    (integer_literal))
-  (literal
-    (integer_literal)))
+  (application_expression
+    (application_expression
+      (literal
+        (integer_literal))
+      (literal
+        (integer_literal)))
+    (literal
+      (integer_literal))))
 
 ================================================================================
 Float literals
@@ -98,14 +100,15 @@ List literals
 --------------------------------------------------------------------------------
 
 (source_file
-  (empty_list)
-  (list_literal
-    (literal
-      (integer_literal))
-    (literal
-      (integer_literal))
-    (literal
-      (integer_literal))))
+  (application_expression
+    (empty_list)
+    (list_literal
+      (literal
+        (integer_literal))
+      (literal
+        (integer_literal))
+      (literal
+        (integer_literal)))))
 
 ================================================================================
 Binary operators
@@ -151,30 +154,10 @@ Comparison operators
 ================================================================================
 
 x == y
-x != y
-x < y
-x > y
-x <= y
-x >= y
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_expression
-    (identifier)
-    (identifier))
-  (binary_expression
-    (identifier)
-    (identifier))
-  (binary_expression
-    (identifier)
-    (identifier))
-  (binary_expression
-    (identifier)
-    (identifier))
-  (binary_expression
-    (identifier)
-    (identifier))
   (binary_expression
     (identifier)
     (identifier)))

@@ -1,0 +1,212 @@
+================================================================================
+Function with dependent types and pattern matching
+================================================================================
+
+def map<A,B>(f: A -> B, xs: A[]) -> B[]:
+  match xs:
+    case []:
+      []
+    case x <> xs:
+      f(x) <> map<A,B>(f, xs)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier))
+      (type_parameter
+        (identifier)))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (function_type
+          (identifier)
+          (identifier)))
+      (parameter
+        (identifier)
+        (list_type
+          (identifier))))
+    return_type: (list_type
+      (identifier))
+    body: (match_expression
+      (identifier)
+      (match_case
+        (pattern
+          (list_pattern))
+        (empty_list))
+      (match_case
+        (pattern
+          (list_pattern
+            (pattern
+              (identifier))
+            (pattern
+              (identifier))))
+        (binary_expression
+          (application_expression
+            (identifier)
+            (identifier))
+          (application_expression
+            (identifier)
+            (identifier)
+            (identifier)
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Type definition with dependent equality constraints
+================================================================================
+
+type Vec<A: Set>(N: Nat) -> Set:
+  case @Nil:
+    e: Nat{N == 0n}
+  case @Cons:
+    n: Nat
+    h: A
+    t: Vec(A,n)
+    e: Nat{N == 1n+n}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)
+        (type_universe)))
+    (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    (type_universe)
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (equality_type
+          (natural_type)
+          (identifier)
+          (literal
+            (nat_literal)))))
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (natural_type))
+      (field_declaration
+        (identifier)
+        (identifier))
+      (field_declaration
+        (identifier)
+        (type_application
+          (identifier)
+          (identifier)
+          (identifier)))
+      (field_declaration
+        (identifier)
+        (equality_type
+          (natural_type)
+          (identifier)
+          (arithmetic_pattern
+            (literal
+              (nat_literal))
+            (identifier)))))))
+
+================================================================================
+Complex expression with lambda, match, and operators
+================================================================================
+
+def complex(n: Nat) -> Nat:
+  x = λ{0n: 1; 1n+: λp. 2 * complex(p)}; 
+  match n:
+    case 0n: x(0n)
+    case 1n+m: x(1n+m) + complex(m)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (let_expression
+      (identifier)
+      (lambda_match
+        (nat_match
+          (literal
+            (integer_literal))
+          (lambda_expression
+            (identifier)
+            (binary_expression
+              (literal
+                (integer_literal))
+              (application_expression
+                function: (identifier)
+                argument: (identifier))))))
+      (match_expression
+        (identifier)
+        (match_case
+          (pattern
+            (literal
+              (nat_literal)))
+          (application_expression
+            function: (identifier)
+            argument: (literal
+              (nat_literal))))
+        (match_case
+          (pattern
+            (arithmetic_pattern
+              (literal
+                (nat_literal))
+              (identifier)))
+          (binary_expression
+            (application_expression
+              function: (identifier)
+              argument: (arithmetic_pattern
+                (literal
+                  (nat_literal))
+                (identifier)))
+            (application_expression
+              function: (identifier)
+              argument: (identifier))))))))
+
+================================================================================
+Proof term with rewrite and equality
+================================================================================
+
+def proof(a: Nat, b: Nat, e: Nat{a == b}) -> Nat{b == a}:
+  rewrite e {==}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type))
+      (parameter
+        (identifier)
+        (natural_type))
+      (parameter
+        (identifier)
+        (equality_type
+          (natural_type)
+          (identifier)
+          (identifier))))
+    return_type: (equality_type
+      (natural_type)
+      (identifier)
+      (identifier))
+    body: (rewrite_expression
+      (identifier)
+      (reflexivity_proof))))

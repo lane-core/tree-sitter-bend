@@ -80,6 +80,8 @@ module.exports = grammar({
       $.import_declaration,
       $.function_definition,
       $.type_definition,
+      $.assertion,
+      $.try_statement,
       $._expression,
     ),
 
@@ -90,10 +92,29 @@ module.exports = grammar({
     import_declaration: $ => seq(
       'import',
       $.module_path,
-      optional(seq('as', $.identifier)),
+      'as',
+      $.identifier,
     ),
 
     module_path: $ => sep1($.identifier, '/'),
+    
+    // Proof constructs
+    assertion: $ => seq(
+      'assert',
+      $._expression,
+      ':',
+      $._type,
+    ),
+    
+    try_statement: $ => seq(
+      'try',
+      $.identifier,
+      ':',
+      $._type,
+      '{',
+      $._expression,
+      '}',
+    ),
 
     // ============================================================================
     // FUNCTION AND TYPE DEFINITIONS  
@@ -223,15 +244,17 @@ module.exports = grammar({
     ),
 
     // Dependent pair types (Σ-types) - Sig constructor
-    sigma_type: $ => prec.right(PREC.FUNCTION_TYPE, seq(
+    sigma_type: $ => prec.right(PREC.FUNCTION_TYPE + 1, seq(
       choice('any', 'Σ'),
-      repeat1(seq($.identifier, ':', $._type)),
+      $.identifier,
+      ':',
+      $._type,
       '.',
       $._type,
     )),
 
     // Simplified sigma: A . B - Sig constructor
-    sigma_simple: $ => prec.right(PREC.SIGMA_DOT, seq(
+    sigma_simple: $ => prec.right(PREC.SIGMA_DOT - 1, seq(
       $._type,
       '.',
       $._type,
@@ -895,7 +918,10 @@ module.exports = grammar({
 
     boolean_literal: $ => choice('True', 'False'), // Bt0, Bt1 constructors
     
-    nat_literal: $ => choice('0n', seq(/[1-9]\d*/, 'n')), // Zer, Suc constructors
+    nat_literal: $ => token(choice(
+      '0n',
+      /[1-9]\d*n/,  // Must end with 'n'
+    )), // Zer, Suc constructors
     
     // Val constructor for numeric values
     numeric_literal: $ => choice(

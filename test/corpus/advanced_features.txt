@@ -1,0 +1,164 @@
+================================================================================
+Import statement
+================================================================================
+
+import Std/List as List
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (import_declaration
+    (module_path
+      (identifier))
+    (identifier)))
+
+================================================================================
+Hierarchical names
+================================================================================
+
+Nat/add
+List/fold
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Assert statement
+================================================================================
+
+assert A == B : Type
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assertion
+    (binary_expression
+      (identifier)
+      (identifier))
+    (identifier)))
+
+================================================================================
+Try statement
+================================================================================
+
+try goal : Type { context }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (try_statement
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+View expression
+================================================================================
+
+view(functionName)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (view_expression
+    (identifier)))
+
+================================================================================
+Log expression
+================================================================================
+
+log "message" expr
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (log_expression
+    (literal
+      (string_literal))
+    (identifier)))
+
+================================================================================
+Return expression
+================================================================================
+
+return 42
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (return_expression
+    (literal
+      (integer_literal))))
+
+================================================================================
+Tuple expression
+================================================================================
+
+(a, b, c)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tuple_expression
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Type with annotated parameters
+================================================================================
+
+type Vec<A: Set, N: Nat>:
+  case @Nil: proof: Nat{N == 0n}
+  case @Cons: n: Nat, h: A, t: Vec(A,n), proof: Nat{N == 1n+n}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)
+        (type_universe))
+      (type_parameter
+        (identifier)
+        (natural_type)))
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (equality_type
+          (natural_type)
+          (identifier)
+          (literal
+            (nat_literal)))))
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (natural_type))
+      (field_declaration
+        (identifier)
+        (identifier))
+      (field_declaration
+        (identifier)
+        (type_application
+          (identifier)
+          (identifier)
+          (identifier)))
+      (field_declaration
+        (identifier)
+        (equality_type
+          (natural_type)
+          (identifier)
+          (arithmetic_pattern
+            (literal
+              (nat_literal))
+            (identifier)))))))

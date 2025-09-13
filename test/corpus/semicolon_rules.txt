@@ -1,0 +1,114 @@
+================================================================================
+Required semicolon in assignment expression
+================================================================================
+
+x = 42; x + 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (identifier)
+    (literal
+      (integer_literal))
+    (binary_expression
+      (identifier)
+      (literal
+        (integer_literal)))))
+
+================================================================================
+Required semicolon in eliminator cases
+================================================================================
+
+λ{False: f; True: t}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda_expression
+    (lambda_match_case
+      (bool_match
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Optional semicolon in brace-form match
+================================================================================
+
+match x { case @A: body; case @B: body }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))))
+
+================================================================================
+No semicolon in colon-form match
+================================================================================
+
+match x:
+  case @A: body
+  case @B: body
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (identifier))))
+
+================================================================================
+Optional final semicolon in eliminator
+================================================================================
+
+λ{False: f; True: t}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda_expression
+    (lambda_match_case
+      (bool_match
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Multiple assignments with semicolons
+================================================================================
+
+x = 1; y = 2; x + y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (identifier)
+    (literal
+      (integer_literal))
+    (let_expression
+      (identifier)
+      (literal
+        (integer_literal))
+      (binary_expression
+        (identifier)
+        (identifier)))))

@@ -1,0 +1,95 @@
+================================================================================
+Simple variable assignment
+================================================================================
+
+x = 42; x + 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (identifier)
+    (literal
+      (integer_literal))
+    (binary_expression
+      (identifier)
+      (literal
+        (integer_literal)))))
+
+================================================================================
+Variable assignment with type annotation
+================================================================================
+
+x : Nat = 5n; x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (identifier)
+    (natural_type)
+    (literal
+      (nat_literal))
+    (identifier)))
+
+================================================================================
+Pattern assignment - tuple
+================================================================================
+
+(x, y) = get_pair(); x + y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (tuple_pattern
+      (identifier)
+      (identifier))
+    (application_expression
+      function: (identifier)
+      arguments: (argument_list))
+    (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Pattern assignment - constructor
+================================================================================
+
+@Some{val} = maybe_thing(); process(val)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (constructor_pattern
+      (constructor_tag
+        (identifier))
+      (identifier))
+    (application_expression
+      function: (identifier)
+      arguments: (argument_list))
+    (application_expression
+      function: (identifier)
+      argument: (identifier))))
+
+================================================================================
+Pattern assignment with type annotation
+================================================================================
+
+(x, y) : Nat & Nat = z; x + y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_expression
+    (tuple_pattern
+      (identifier)
+      (identifier))
+    (function_type
+      (natural_type)
+      (natural_type))
+    (identifier)
+    (binary_expression
+      (identifier)
+      (identifier))))
