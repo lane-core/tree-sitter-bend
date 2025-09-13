@@ -93,13 +93,16 @@
 ; HIERARCHICAL NAMES
 ; ============================================================================
 
-; Namespace components in hierarchical names
+; Namespace components - use @constant for strong visual distinction
 (hierarchical_name
-  namespace_component: (identifier) @namespace)
+  namespace_component: (identifier) @constant.builtin)
 
-; Function names in hierarchical names  
+; Function names in hierarchical names - keep as function
 (hierarchical_name
-  function_name: (identifier) @function)
+  function_name: (identifier) @function.method)
+
+; Make slashes stand out as operators
+(hierarchical_name "/" @operator)
 
 ; ============================================================================
 ; APPLICATIONS
@@ -108,11 +111,11 @@
 (application_expression function: (identifier) @function.call)
 (application_expression function: (name (identifier) @function.call))
 (application_expression function: (name (hierarchical_name
-  namespace_component: (identifier) @namespace
+  namespace_component: (identifier) @constant.builtin
   function_name: (identifier) @function.call)))
 (type_application (name (identifier) @type))
 (type_application (name (hierarchical_name
-  namespace_component: (identifier) @namespace
+  namespace_component: (identifier) @constant.builtin
   function_name: (identifier) @type)))
 
 ; ============================================================================
@@ -246,8 +249,16 @@
 ; COMMENTS AND MODULES
 ; ============================================================================
 
+; Basic comments
 (line_comment) @comment.line
 (block_comment) @comment.block
+
+; Special comment markers (TODO, FIXME, NOTE, etc.)
+((line_comment) @comment.documentation
+  (#match? @comment.documentation "^#\\s*(TODO|FIXME|NOTE|WARNING|HACK|XXX|BUG|IMPORTANT):"))
+
+((block_comment) @comment.documentation
+  (#match? @comment.documentation "\\{-\\s*(TODO|FIXME|NOTE|WARNING|HACK|XXX|BUG|IMPORTANT):"))
 
 ; ============================================================================
 ; ADVANCED CONSTRUCTS

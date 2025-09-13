@@ -1,0 +1,175 @@
+================================================================================
+Line comment basics
+================================================================================
+
+# Single line comment
+x = 5 # Inline comment
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (line_comment)
+  (binary_expression
+    (name
+      (identifier))
+    (literal
+      (integer_literal)))
+  (line_comment))
+
+================================================================================
+Block comment basics
+================================================================================
+
+{- Single line block -}
+{- Multi
+   line
+   block -}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block_comment)
+  (block_comment))
+
+================================================================================
+Comments in function
+================================================================================
+
+def test() -> Nat:
+  # Comment in function
+  x = 5
+  {- Block comment -}
+  y = 10
+  x + y # Final comment
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (name
+      (identifier))
+    parameters: (parameters)
+    return_type: (natural_type)
+    (line_comment)
+    body: (binary_expression
+      (name
+        (identifier))
+      (binary_expression
+        (application_expression
+          function: (literal
+            (integer_literal))
+          (block_comment)
+          argument: (name
+            (identifier)))
+        (binary_expression
+          (application_expression
+            function: (literal
+              (integer_literal))
+            argument: (name
+              (identifier)))
+          (name
+            (identifier))))))
+  (line_comment))
+
+================================================================================
+Mixed comments with code
+================================================================================
+
+# Start comment
+def f(x: Nat) -> Nat:
+  {- Calculate result -}
+  x * 2 # Double it
+
+# End comment
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (line_comment)
+  (function_definition
+    name: (name
+      (identifier))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    (block_comment)
+    body: (binary_expression
+      (name
+        (identifier))
+      (literal
+        (integer_literal))))
+  (line_comment)
+  (line_comment))
+
+================================================================================
+Block comments with special characters
+================================================================================
+
+{- Comment with code: def f() = 5 -}
+{- Multi-line with symbols:
+   @#$%^&*()
+   <- -> :: -}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block_comment)
+  (block_comment))
+
+================================================================================
+Inline block comments in expressions
+================================================================================
+
+x = {- comment -} 5 + {- another -} 10
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (name
+      (identifier))
+    (block_comment)
+    (binary_expression
+      (literal
+        (integer_literal))
+      (block_comment)
+      (literal
+        (integer_literal)))))
+
+================================================================================
+Comments with Unicode
+================================================================================
+
+# Unicode: λ ∀ ∃ 你好 🎉
+{- Block with unicode: μ Σ Π -}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (line_comment)
+  (block_comment))
+
+================================================================================
+Nested-looking block comments (not actually nested)
+================================================================================
+
+{- Outer {- Not really nested -} Still in first comment -}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block_comment)
+  (application_expression
+    (application_expression
+      (application_expression
+        (name
+          (identifier))
+        (name
+          (identifier)))
+      (name
+        (identifier)))
+    (name
+      (identifier)))
+  (ERROR))

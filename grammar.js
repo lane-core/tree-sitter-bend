@@ -1069,13 +1069,7 @@ module.exports = grammar({
     
     block_comment: $ => token(seq(
       '{-',
-      repeat(choice(
-        /[^{-]+/,
-        '{',
-        '-',
-        seq('{', /[^-]/),
-        seq('-', /[^}]/),
-      )),
+      /[^-]*(?:-[^}]|[^-])*/, // Match anything until we hit -}
       '-}',
     )),
   }
