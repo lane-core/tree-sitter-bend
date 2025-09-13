@@ -1,0 +1,213 @@
+================================================================================
+Boolean literals
+================================================================================
+
+True
+False
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (literal
+      (boolean_literal))
+    (literal
+      (boolean_literal))))
+
+================================================================================
+Natural number literals
+================================================================================
+
+0n
+42n
+100n
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (application_expression
+      (literal
+        (nat_literal))
+      (literal
+        (nat_literal)))
+    (literal
+      (nat_literal))))
+
+================================================================================
+Integer literals
+================================================================================
+
+42
+-5
++10
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (literal
+    (integer_literal))
+  (literal
+    (integer_literal))
+  (literal
+    (integer_literal)))
+
+================================================================================
+Float literals
+================================================================================
+
+3.14
+-2.5
++1.0
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (application_expression
+      (literal
+        (float_literal))
+      (literal
+        (float_literal)))
+    (literal
+      (float_literal))))
+
+================================================================================
+String and character literals
+================================================================================
+
+"hello world"
+'c'
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (literal
+      (string_literal))
+    (literal
+      (character_literal))))
+
+================================================================================
+List literals
+================================================================================
+
+[]
+[1, 2, 3]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (empty_list)
+  (list_literal
+    (literal
+      (integer_literal))
+    (literal
+      (integer_literal))
+    (literal
+      (integer_literal))))
+
+================================================================================
+Binary operators
+================================================================================
+
+x + y
+x - y
+x * y
+x / y
+x % y
+x ** y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (binary_expression
+      (binary_expression
+        (application_expression
+          (application_expression
+            (identifier)
+            (identifier))
+          (unary_expression
+            (binary_expression
+              (application_expression
+                (identifier)
+                (identifier))
+              (application_expression
+                (identifier)
+                (identifier)))))
+        (application_expression
+          (identifier)
+          (identifier)))
+      (binary_expression
+        (application_expression
+          (identifier)
+          (identifier))
+        (identifier)))))
+
+================================================================================
+Comparison operators
+================================================================================
+
+x == y
+x != y
+x < y
+x > y
+x <= y
+x >= y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+List cons operator
+================================================================================
+
+x <> xs
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+================================================================================
+Unary operators
+================================================================================
+
+not x
+-x
+~x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (application_expression
+    (unary_expression
+      (identifier))
+    (unary_expression
+      (application_expression
+        (identifier)
+        (tilde_expression
+          (identifier))))))

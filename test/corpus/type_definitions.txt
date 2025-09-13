@@ -1,0 +1,78 @@
+================================================================================
+Simple type definition
+================================================================================
+
+type Bool:
+  case @True:
+  case @False:
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (identifier)
+    (constructor_case
+      (constructor_tag
+        (identifier)))
+    (constructor_case
+      (constructor_tag
+        (identifier)))))
+
+================================================================================
+Type with parameters
+================================================================================
+
+type List<A: Set>:
+  case @Nil:
+  case @Cons: head: A, tail: List(A)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)
+        (type_universe)))
+    (constructor_case
+      (constructor_tag
+        (identifier)))
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (identifier))
+      (field_declaration
+        (identifier)
+        (type_application
+          (identifier)
+          (identifier))))))
+
+================================================================================
+Type with multiple type parameters
+================================================================================
+
+type Pair<A, B>:
+  case @MkPair: fst: A, snd: B
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier))
+      (type_parameter
+        (identifier)))
+    (constructor_case
+      (constructor_tag
+        (identifier))
+      (field_declaration
+        (identifier)
+        (identifier))
+      (field_declaration
+        (identifier)
+        (identifier)))))

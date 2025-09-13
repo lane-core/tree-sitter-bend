@@ -63,7 +63,6 @@
 ; ============================================================================
 
 (function_definition (identifier) @function)
-(variable_definition (identifier) @variable.definition)
 (type_definition (identifier) @type.definition)
 (parameter (identifier) @parameter)
 (type_parameter (identifier) @type.parameter)

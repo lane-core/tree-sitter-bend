@@ -1,0 +1,125 @@
+================================================================================
+Simple function with parameters
+================================================================================
+
+def add(x: Nat, y: Nat) -> Nat:
+  x + y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type))
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Function with type parameters
+================================================================================
+
+def id<A>(x: A) -> A:
+  x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)))
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (identifier)))
+    return_type: (identifier)
+    body: (identifier)))
+
+================================================================================
+Zero-argument function
+================================================================================
+
+def get_zero: 0n
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    body: (literal
+      (nat_literal))))
+
+================================================================================
+Simple constant definition
+================================================================================
+
+def PI: F64 = 3.14159
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    type: (numeric_type)
+    value: (literal
+      (float_literal))))
+
+================================================================================
+Function with multi-line parameters
+================================================================================
+
+def complex
+  ( x: Nat
+  , y: Nat
+  , z: Nat
+  ) -> Nat:
+  x + y + z
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type))
+      (parameter
+        (identifier)
+        (natural_type))
+      (parameter
+        (identifier)
+        (natural_type)))
+    return_type: (natural_type)
+    body: (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (identifier))))
+
+================================================================================
+Function without return type annotation
+================================================================================
+
+def simple(x: Nat):
+  x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        (identifier)
+        (natural_type)))
+    body: (identifier)))

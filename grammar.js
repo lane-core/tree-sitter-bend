@@ -41,16 +41,12 @@ module.exports = grammar({
     // Essential dependent type ambiguities (necessary for dependent types)
     [$._type, $._expression],
     [$._type, $._expression, $.let_expression],
-    [$._type, $.let_expression],
-    [$.parenthesized_type, $.parenthesized_expression],
     [$.function_definition, $._expression],
-    [$.function_definition, $.application_expression, $.binary_expression],
     
     // Application conflicts (context-dependent disambiguation needed)
     [$.application_expression, $.binary_expression],
     [$.application_expression, $.tilde_expression, $.unary_expression],
     [$.application_expression, $.binary_expression, $.unary_expression],
-    [$.pattern, $._expression],
     
     // Let expressions (necessary for context-dependent parsing)
     [$.let_expression, $.assignment_statement],
@@ -61,9 +57,6 @@ module.exports = grammar({
     // Equality types (context-dependent disambiguation)
     [$.equality_type, $._expression],
     
-    // Tilde expression conflicts (necessary for ~ operator overloading)
-    [$.tilde_expression, $.unary_expression],
-    
     // Lambda conflicts (different lambda forms)
     [$.lambda_expression, $.lambda_match],
     [$.lambda_match, $.lambda_match_case],
@@ -72,8 +65,6 @@ module.exports = grammar({
     [$.implicit_application, $.binary_expression, $.superposition],
     [$.implicit_application, $.superposition],
     [$.implicit_application, $.tilde_match],
-    [$.application_expression, $.unary_expression],
-    [$.tilde_expression, $.tilde_match],
     [$.enum_type, $.enum_literal],
     [$.list_type, $.metavar],
     [$.tuple_pattern, $.parenthesized_pattern],

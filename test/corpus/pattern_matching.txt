@@ -1,0 +1,109 @@
+================================================================================
+Simple match expression
+================================================================================
+
+match x:
+  case @Zero: 0
+  case @Succ{pred}: 1 + pred
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (literal
+        (integer_literal)))
+    (match_case
+      (pattern
+        (constructor_application
+          (constructor_tag
+            (identifier))
+          (identifier)))
+      (binary_expression
+        (literal
+          (integer_literal))
+        (identifier)))))
+
+================================================================================
+Match with multiple scrutinees
+================================================================================
+
+match x y:
+  case @True @False: 0
+  case @False @True: 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (identifier)
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (literal
+        (integer_literal)))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (literal
+        (integer_literal)))))
+
+================================================================================
+Match with arithmetic patterns
+================================================================================
+
+match n:
+  case 0n: zero
+  case 1n + m: succ(m)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (match_expression
+    (identifier)
+    (match_case
+      (pattern
+        (literal
+          (nat_literal)))
+      (identifier))
+    (match_case
+      (pattern
+        (arithmetic_pattern
+          (literal
+            (nat_literal))
+          (identifier)))
+      (application_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+If expression
+================================================================================
+
+if x:
+  True
+else:
+  False
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_expression
+    (identifier)
+    (literal
+      (boolean_literal))
+    (literal
+      (boolean_literal))))
