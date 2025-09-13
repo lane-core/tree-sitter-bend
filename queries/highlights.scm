@@ -72,7 +72,10 @@
 ; ============================================================================
 
 (function_definition 
-  name: (identifier) @function.definition)
+  name: (name (identifier) @function.definition))
+(function_definition
+  name: (name (hierarchical_name
+    function_name: (identifier) @function.definition)))
 (type_definition 
   (identifier) @type.definition)
 (parameter 
@@ -87,12 +90,30 @@
   alias: (identifier) @module)
 
 ; ============================================================================
+; HIERARCHICAL NAMES
+; ============================================================================
+
+; Namespace components in hierarchical names
+(hierarchical_name
+  namespace_component: (identifier) @namespace)
+
+; Function names in hierarchical names  
+(hierarchical_name
+  function_name: (identifier) @function)
+
+; ============================================================================
 ; APPLICATIONS
 ; ============================================================================
 
-(application_expression (identifier) @function.call)
-(implicit_application (identifier) @function.call)
-(type_application (identifier) @type)
+(application_expression function: (identifier) @function.call)
+(application_expression function: (name (identifier) @function.call))
+(application_expression function: (name (hierarchical_name
+  namespace_component: (identifier) @namespace
+  function_name: (identifier) @function.call)))
+(type_application (name (identifier) @type))
+(type_application (name (hierarchical_name
+  namespace_component: (identifier) @namespace
+  function_name: (identifier) @type)))
 
 ; ============================================================================
 ; CONSTRUCTORS

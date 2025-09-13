@@ -9,22 +9,27 @@ import Std/List as List
 (source_file
   (import_declaration
     (module_path
-      (identifier))
+      (hierarchical_name
+        (identifier)
+        (identifier)))
     (identifier)))
 
 ================================================================================
 Hierarchical names
 ================================================================================
 
-Nat/add
-List/fold
+def test: Math/add
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
-    (identifier)
-    (identifier)))
+  (function_definition
+    name: (name
+      (identifier))
+    body: (name
+      (hierarchical_name
+        namespace_component: (identifier)
+        function_name: (identifier)))))
 
 ================================================================================
 Assert statement
@@ -37,9 +42,12 @@ assert A == B : Type
 (source_file
   (assertion
     (binary_expression
-      (identifier)
-      (identifier))
-    (identifier)))
+      (name
+        (identifier))
+      (name
+        (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Try statement
@@ -52,8 +60,10 @@ try goal : Type { context }
 (source_file
   (try_statement
     (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 View expression
@@ -65,7 +75,8 @@ view(functionName)
 
 (source_file
   (view_expression
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Log expression
@@ -79,7 +90,8 @@ log "message" expr
   (log_expression
     (literal
       (string_literal))
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Return expression
@@ -104,9 +116,12 @@ Tuple expression
 
 (source_file
   (tuple_expression
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Type with annotated parameters
@@ -135,7 +150,8 @@ type Vec<A: Set, N: Nat>:
         (identifier)
         (equality_type
           (natural_type)
-          (identifier)
+          (name
+            (identifier))
           (literal
             (nat_literal)))))
     (constructor_case
@@ -147,21 +163,27 @@ type Vec<A: Set, N: Nat>:
       (ERROR)
       (field_declaration
         (identifier)
-        (identifier))
+        (name
+          (identifier)))
       (ERROR)
       (field_declaration
         (identifier)
         (type_application
-          (identifier)
-          (identifier)
-          (identifier)))
+          (name
+            (identifier))
+          (name
+            (identifier))
+          (name
+            (identifier))))
       (ERROR)
       (field_declaration
         (identifier)
         (equality_type
           (natural_type)
-          (identifier)
+          (name
+            (identifier))
           (binary_expression
             (literal
               (nat_literal))
-            (identifier)))))))
+            (name
+              (identifier))))))))

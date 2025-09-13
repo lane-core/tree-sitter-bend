@@ -8,11 +8,14 @@ all x: Nat. Vec(x)
 
 (source_file
   (function_type
-    (identifier)
+    (name
+      (identifier))
     (natural_type)
     (type_application
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Existential quantification (Sigma-type)
@@ -27,8 +30,10 @@ any x: Nat. Vec(x)
     (identifier)
     (natural_type)
     (type_application
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Equality type
@@ -42,8 +47,10 @@ Nat{a == b}
   (implicit_application
     (natural_type)
     (binary_expression
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Function type arrow
@@ -55,8 +62,10 @@ A -> B
 
 (source_file
   (function_type
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Type universe
@@ -82,8 +91,10 @@ Metavariable with context
     (metavar
       (identifier)
       (natural_type))
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Reflexivity proof
@@ -106,8 +117,10 @@ rewrite e1 e2
 
 (source_file
   (rewrite_expression
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Absurd expression
@@ -119,4 +132,5 @@ absurd x
 
 (source_file
   (absurd_expression
-    (identifier)))
+    (name
+      (identifier))))

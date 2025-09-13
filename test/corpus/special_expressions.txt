@@ -9,15 +9,18 @@ def proof(n: Nat) -> Nat{n == n}:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
     return_type: (equality_type
       (natural_type)
-      (identifier)
-      (identifier))
+      (name
+        (identifier))
+      (name
+        (identifier)))
     body: (reflexivity_proof)))
 
 ================================================================================
@@ -35,18 +38,22 @@ Fixed point expression
       (identifier)
       (if_expression
         (binary_expression
-          (identifier)
+          (name
+            (identifier))
           (literal
             (nat_literal)))
         (literal
           (integer_literal))
         (binary_expression
-          (identifier)
+          (name
+            (identifier))
           (application_expression
-            (identifier)
+            function: (name
+              (identifier))
             (application_expression
-              (identifier)
-              (unary_expression
+              function: (name
+                (identifier))
+              argument: (unary_expression
                 (literal
                   (integer_literal))))))))))
 
@@ -60,7 +67,8 @@ trust dangerous_computation
 
 (source_file
   (trust_expression
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 View expression
@@ -73,10 +81,14 @@ view(helper_function)
 
 (source_file
   (application_expression
-    (view_expression
-      (identifier))
-    (view_expression
-      (identifier))))
+    function: (view_expression
+      (name
+        (hierarchical_name
+          namespace_component: (identifier)
+          function_name: (identifier))))
+    argument: (view_expression
+      (name
+        (identifier)))))
 
 ================================================================================
 Use binding
@@ -90,8 +102,10 @@ use_x_here
 (source_file
   (use_expression
     (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Log expression with string
@@ -107,8 +121,10 @@ log "Computing result" (x + y)
       (string_literal))
     (parenthesized_expression
       (binary_expression
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Eraser placeholder
@@ -121,13 +137,15 @@ def ignore<A>(x: A) -> Unit:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     (type_parameters
       (type_parameter
         (identifier)))
     parameters: (parameters
       (parameter
         (identifier)
-        (identifier)))
+        (name
+          (identifier))))
     return_type: (unit_type)
     body: (era_expression)))

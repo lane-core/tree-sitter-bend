@@ -21,7 +21,8 @@ Unit eliminator
   (lambda_expression
     (lambda_match_case
       (unit_match
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 Boolean eliminator
@@ -35,8 +36,10 @@ Boolean eliminator
   (lambda_expression
     (lambda_match_case
       (bool_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Nat eliminator
@@ -50,8 +53,10 @@ Nat eliminator
   (lambda_expression
     (lambda_match_case
       (nat_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 List eliminator
@@ -65,8 +70,10 @@ List eliminator
   (lambda_expression
     (lambda_match_case
       (list_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Pair eliminator
@@ -80,7 +87,8 @@ Pair eliminator
   (lambda_expression
     (lambda_match_case
       (pair_match
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 Enum eliminator with default
@@ -96,11 +104,14 @@ Enum eliminator with default
       (enum_match
         (constructor_tag
           (identifier))
-        (identifier)
+        (name
+          (identifier))
         (constructor_tag
           (identifier))
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Simple enum eliminator
@@ -116,4 +127,5 @@ Simple enum eliminator
       (enum_match
         (enum_symbol
           (identifier))
-        (identifier)))))
+        (name
+          (identifier))))))

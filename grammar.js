@@ -42,7 +42,10 @@ module.exports = grammar({
   conflicts: $ => [
     // Essential dependent type ambiguities (necessary for dependent types)
     [$._type, $._expression],
-    [$._type, $._expression, $.let_expression],
+    [$._type, $._expression, $.let_expression], 
+    [$._type, $.name],
+    [$._type, $.let_expression, $.name],
+    [$._type, $.hierarchical_name, $.name],
     [$.function_definition, $._expression],
     
     // Application conflicts (context-dependent disambiguation needed)
@@ -52,6 +55,8 @@ module.exports = grammar({
     
     // Let expressions (necessary for context-dependent parsing)
     [$.let_expression, $.assignment_statement],
+    [$.let_expression, $.name],
+    [$.hierarchical_name, $.name],
     
     // Pattern conflicts
     [$.arithmetic_pattern, $.list_pattern],
@@ -100,9 +105,9 @@ module.exports = grammar({
     ),
     
     // Module paths use hierarchical identifiers with slashes
-    module_path: $ => seq(
+    module_path: $ => choice(
       $.identifier,
-      repeat(seq('/', $.identifier))
+      $.hierarchical_name
     ),
 
     // ============================================================================
@@ -135,7 +140,7 @@ module.exports = grammar({
       // Function with parameters: def name(params) -> Type : body
       prec(3, seq(
         'def',
-        field('name', $.identifier),
+        field('name', $.name),
         optional($.type_parameters),
         field('parameters', $.parameters),
         optional(seq('->', field('return_type', $._type))),
@@ -145,7 +150,7 @@ module.exports = grammar({
       // Simple definition: def name : Type = value  
       prec.dynamic(10, seq(
         'def',
-        field('name', $.identifier),
+        field('name', $.name),
         optional($.type_parameters),
         ':',
         field('type', $._type),
@@ -155,7 +160,7 @@ module.exports = grammar({
       // Zero-arg function: def name : body
       prec(1, seq(
         'def',
-        field('name', $.identifier),
+        field('name', $.name),
         optional($.type_parameters),
         ':',
         field('body', $._expression),
@@ -194,8 +199,8 @@ module.exports = grammar({
     ),
 
     type_parameter: $ => choice(
-      $.identifier,
-      seq($.identifier, ':', $._type),
+      $.identifier,  // Simple type parameters stay as identifiers
+      seq($.identifier, ':', $._type),  // Type parameter bounds
     ),
 
     // Implicit parameters with curly braces
@@ -216,6 +221,7 @@ module.exports = grammar({
       $.boolean_type,       // Bool
       $.natural_type,       // Nat
       $.numeric_type,       // U64, I64, F64, Char
+      $.name,               // Type names (simple or hierarchical)
       $.function_type,      // all x: A. B (Π-types)
       $.sigma_type,         // any x: A. B (Σ-types) 
       $.sigma_simple,       // A . B
@@ -226,7 +232,6 @@ module.exports = grammar({
       $.metavar,            // ?M:T{ctx}
       $.parenthesized_type,
       $.type_application,
-      $.identifier,         // Type variables
     ),
 
     type_universe: $ => 'Set',
@@ -242,7 +247,7 @@ module.exports = grammar({
       // Full form: all x: A. B
       prec.right(PREC.FUNCTION_TYPE, seq(
         choice('all', '∀'),
-        sep1(seq($.identifier, ':', $._type), ','),
+        sep1(seq($.name, ':', $._type), ','),
         '.',
         $._type,
       )),
@@ -310,7 +315,7 @@ module.exports = grammar({
     parenthesized_type: $ => prec(PREC.TIGHT_POSTFIX, seq('(', $._type, ')')),
 
     type_application: $ => prec(PREC.APPLICATION, seq(
-      $.identifier,
+      $.name,  // Support hierarchical type names
       choice(
         // Explicit type application: F<A, B>
         seq('<', sep1($._type, ','), '>'),
@@ -345,8 +350,8 @@ module.exports = grammar({
     // ============================================================================
 
     _expression: $ => choice(
-      // Variables and references
-      $.identifier,           // Var constructor
+      // Variables and references  
+      $.name,                 // Var constructor (simple or hierarchical)
       $.reference,           // Ref constructor  
       $.substitution,        // Sub constructor
       
@@ -441,8 +446,8 @@ module.exports = grammar({
           repeat1(choice(
             $.identifier,
             seq('(', sep1($.pattern, ','), ')'),
-            seq($.identifier, ':', $._type),
-            seq('(', $.identifier, ':', $._type, ')'),
+            seq($.name, ':', $._type),
+            seq('(', $.name, ':', $._type, ')'),
           )),
           '.',
           $._expression,
@@ -542,7 +547,7 @@ module.exports = grammar({
     application_expression: $ => choice(
       // Tight polymorphic application: f<A,B>(x,y) - no spaces
       prec(PREC.TIGHT_POSTFIX, seq(
-        $.identifier,
+        field('function', $.name),
         token.immediate('<'),
         sep1($._expression, ','),
         token.immediate('>'),
@@ -553,7 +558,7 @@ module.exports = grammar({
       
       // Tight regular application: f(x,y) - no spaces
       prec(PREC.TIGHT_POSTFIX, seq(
-        $.identifier,
+        field('function', $.name),
         token.immediate('('),
         sep($._expression, ','),
         ')',
@@ -561,7 +566,7 @@ module.exports = grammar({
       
       // Loose polymorphic application: f <A,B> (x,y) - with spaces
       prec(PREC.APPLICATION, seq(
-        $.identifier,
+        field('function', $.name),
         '<',
         sep1($._expression, ','),
         '>',
@@ -572,7 +577,7 @@ module.exports = grammar({
       
       // Loose regular application: f (x,y) - with spaces
       prec(PREC.APPLICATION, seq(
-        $.identifier,
+        field('function', $.name),
         '(',
         sep($._expression, ','),
         ')',
@@ -820,7 +825,7 @@ module.exports = grammar({
     view_expression: $ => seq(
       'view',
       '(',
-      $.identifier,
+      $.name,
       ')',
     ),
 
@@ -1040,9 +1045,24 @@ module.exports = grammar({
     // IDENTIFIERS AND COMMENTS
     // ============================================================================
 
-    identifier: $ => choice(
-      /[a-zA-Z_][a-zA-Z0-9_]*/,
-      /[a-zA-Z_][a-zA-Z0-9_]*(?:\/[a-zA-Z_][a-zA-Z0-9_]*)*/,
+    // Simple identifier (no slashes)
+    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    
+    // Hierarchical name: Namespace/Path/function_name
+    hierarchical_name: $ => prec.left(seq(
+      field('namespace_component', $.identifier),
+      '/',
+      repeat(seq(
+        field('namespace_component', $.identifier),
+        '/'
+      )),
+      field('function_name', $.identifier)
+    )),
+    
+    // Any name (simple or hierarchical)
+    name: $ => choice(
+      $.identifier,
+      $.hierarchical_name
     ),
 
     line_comment: $ => token(seq('#', /.*/)),

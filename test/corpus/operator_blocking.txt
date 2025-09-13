@@ -8,9 +8,12 @@ if x: y else: z
 
 (source_file
   (if_expression
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Tilde expression with braces (blocking { in term)
@@ -22,10 +25,13 @@ Tilde expression with braces (blocking { in term)
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (bool_match
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Fork with colon (blocking : in label)
@@ -37,10 +43,14 @@ fork L: a elif: b else: c
 
 (source_file
   (fork_expression
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Match with colon (blocking : in scrutinee)
@@ -54,14 +64,17 @@ match x:
 
 (source_file
   (match_expression
-    (identifier)
-    (match_case
-      (pattern
-        (constructor_tag
-          (identifier)))
+    (name
       (identifier))
     (match_case
       (pattern
         (constructor_tag
           (identifier)))
-      (identifier))))
+      (name
+        (identifier)))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (name
+        (identifier)))))

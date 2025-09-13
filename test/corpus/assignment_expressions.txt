@@ -12,7 +12,8 @@ x = 42; x + 1
     (literal
       (integer_literal))
     (binary_expression
-      (identifier)
+      (name
+        (identifier))
       (literal
         (integer_literal)))))
 
@@ -30,7 +31,8 @@ x : Nat = 5n; x
     (natural_type)
     (literal
       (nat_literal))
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Pattern assignment - tuple
@@ -43,7 +45,8 @@ match get_pair(): case (x, y): x + y
 (source_file
   (match_expression
     (application_expression
-      function: (identifier)
+      function: (name
+        (identifier))
       argument: (unit_literal))
     (match_case
       (pattern
@@ -53,8 +56,10 @@ match get_pair(): case (x, y): x + y
           (pattern
             (identifier))))
       (binary_expression
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Pattern assignment - constructor
@@ -67,17 +72,21 @@ match maybe_thing(): case @Some{val}: process(val)
 (source_file
   (match_expression
     (application_expression
-      function: (identifier)
+      function: (name
+        (identifier))
       argument: (unit_literal))
     (match_case
       (pattern
         (constructor_application
           (constructor_tag
             (identifier))
-          (identifier)))
+          (name
+            (identifier))))
       (application_expression
-        (identifier)
-        (identifier)))))
+        function: (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Variable assignment with complex type annotation
@@ -94,6 +103,7 @@ z : Nat = 5n; z + 1n
     (literal
       (nat_literal))
     (binary_expression
-      (identifier)
+      (name
+        (identifier))
       (literal
         (nat_literal)))))

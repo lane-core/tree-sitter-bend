@@ -9,7 +9,8 @@ Tilde empty match
 (source_file
   (tilde_expression
     (implicit_application
-      (identifier))))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde boolean match
@@ -21,10 +22,13 @@ Tilde boolean match
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (bool_match
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde nat match
@@ -36,10 +40,13 @@ Tilde nat match
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (nat_match
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde list match
@@ -51,10 +58,13 @@ Tilde list match
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (list_match
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde pair match
@@ -66,9 +76,11 @@ Tilde pair match
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (pair_match
-      (identifier))))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde enum match with default
@@ -80,15 +92,19 @@ Tilde enum match with default
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (enum_match
       (constructor_tag
         (identifier))
-      (identifier)
+      (name
+        (identifier))
       (constructor_tag
         (identifier))
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Tilde superposition match
@@ -101,11 +117,13 @@ Tilde superposition match
 (source_file
   (tilde_expression
     (implicit_application
-      (identifier)
+      (name
+        (identifier))
       (application_expression
         (implicit_application
           (enum_symbol
             (identifier))
           (ERROR))
         (ERROR)
-        (identifier)))))
+        (name
+          (identifier))))))

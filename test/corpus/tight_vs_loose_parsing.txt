@@ -8,7 +8,8 @@ f()
 
 (source_file
   (application_expression
-    function: (identifier)
+    function: (name
+      (identifier))
     argument: (unit_literal)))
 
 ================================================================================
@@ -21,7 +22,8 @@ f ()
 
 (source_file
   (application_expression
-    function: (identifier)
+    function: (name
+      (identifier))
     argument: (unit_literal)))
 
 ================================================================================
@@ -34,7 +36,8 @@ A[]
 
 (source_file
   (list_type
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Loose application to empty list
@@ -46,7 +49,8 @@ A []
 
 (source_file
   (list_type
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Tight type application
@@ -57,10 +61,13 @@ f<T,U>
 --------------------------------------------------------------------------------
 
 (source_file
-  (identifier)
+  (name
+    (identifier))
   (ERROR
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Tight equality predicate
@@ -74,8 +81,10 @@ Nat{x == y}
   (implicit_application
     (natural_type)
     (binary_expression
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Combined tight postfix operations
@@ -88,7 +97,10 @@ f<A>(x)[]
 (source_file
   (application_expression
     function: (application_expression
-      (identifier)
-      (identifier)
-      (identifier))
+      function: (name
+        (identifier))
+      (name
+        (identifier))
+      (name
+        (identifier)))
     argument: (empty_list)))

@@ -10,7 +10,8 @@ match x:
 
 (source_file
   (match_expression
-    (identifier)
+    (name
+      (identifier))
     (match_case
       (pattern
         (constructor_tag
@@ -22,11 +23,13 @@ match x:
         (constructor_application
           (constructor_tag
             (identifier))
-          (identifier)))
+          (name
+            (identifier))))
       (binary_expression
         (literal
           (integer_literal))
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 Match with multiple scrutinees
@@ -43,8 +46,10 @@ match a b:
 (source_file
   (match_expression
     (application_expression
-      (identifier)
-      (identifier))
+      function: (name
+        (identifier))
+      argument: (name
+        (identifier)))
     (match_case
       (pattern
         (literal
@@ -88,9 +93,12 @@ match a b:
           (pattern
             (identifier))))
       (application_expression
-        (identifier)
-        (identifier)
-        (identifier)))))
+        function: (name
+          (identifier))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Match with arithmetic patterns
@@ -104,12 +112,14 @@ match n:
 
 (source_file
   (match_expression
-    (identifier)
+    (name
+      (identifier))
     (match_case
       (pattern
         (literal
           (nat_literal)))
-      (identifier))
+      (name
+        (identifier)))
     (match_case
       (pattern
         (arithmetic_pattern
@@ -117,8 +127,10 @@ match n:
           (pattern
             (identifier))))
       (application_expression
-        (identifier)
-        (identifier)))))
+        function: (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 If expression
@@ -133,7 +145,8 @@ else:
 
 (source_file
   (if_expression
-    (identifier)
+    (name
+      (identifier))
     (literal
       (boolean_literal))
     (literal

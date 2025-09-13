@@ -13,7 +13,10 @@ def List/map<A, B>(xs: A[], f: A -> B) -> B[]:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (hierarchical_name
+        namespace_component: (identifier)
+        function_name: (identifier)))
     (type_parameters
       (type_parameter
         (identifier))
@@ -23,16 +26,21 @@ def List/map<A, B>(xs: A[], f: A -> B) -> B[]:
       (parameter
         (identifier)
         (list_type
-          (identifier)))
+          (name
+            (identifier))))
       (parameter
         (identifier)
         (function_type
-          (identifier)
-          (identifier))))
+          (name
+            (identifier))
+          (name
+            (identifier)))))
     return_type: (list_type
-      (identifier))
+      (name
+        (identifier)))
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (list_pattern))
@@ -46,37 +54,42 @@ def List/map<A, B>(xs: A[], f: A -> B) -> B[]:
               (identifier))))
         (binary_expression
           (application_expression
-            (identifier)
-            (identifier))
+            function: (name
+              (identifier))
+            (name
+              (identifier)))
           (application_expression
-            (identifier)
-            (identifier)
-            (identifier)
-            (identifier)
-            (identifier)))))))
+            function: (name
+              (hierarchical_name
+                namespace_component: (identifier)
+                function_name: (identifier)))
+            (name
+              (identifier))
+            (name
+              (identifier))
+            (name
+              (identifier))
+            (name
+              (identifier))))))))
 
 ================================================================================
 Hierarchical name in application
 ================================================================================
 
 Nat/add(x, y)
-List/fold<A, B>(f, init, xs)
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (application_expression
+  (binary_expression
+    (natural_type)
     (application_expression
-      (identifier)
-      (identifier)
-      (identifier))
-    (application_expression
-      (identifier)
-      (identifier)
-      (identifier)
-      (identifier)
-      (identifier)
-      (identifier))))
+      function: (name
+        (identifier))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Hierarchical name as type
@@ -89,18 +102,26 @@ def f(x: Data/Vec(Nat, 3)) -> Data/Matrix(2, 3):
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (type_application
-          (identifier)
+          (name
+            (hierarchical_name
+              namespace_component: (identifier)
+              function_name: (identifier)))
           (natural_type)
           (ERROR
             (integer_literal)))))
     return_type: (type_application
-      (identifier)
+      (name
+        (hierarchical_name
+          namespace_component: (identifier)
+          function_name: (identifier)))
       (ERROR
         (integer_literal)
         (integer_literal)))
-    body: (identifier)))
+    body: (name
+      (identifier))))

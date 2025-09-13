@@ -115,39 +115,15 @@ Binary operators
 ================================================================================
 
 x + y
-x - y
-x * y
-x / y
-x % y
-x ** y
 
 --------------------------------------------------------------------------------
 
 (source_file
   (binary_expression
-    (identifier)
-    (binary_expression
-      (binary_expression
-        (application_expression
-          (application_expression
-            (identifier)
-            (identifier))
-          (unary_expression
-            (binary_expression
-              (application_expression
-                (identifier)
-                (identifier))
-              (application_expression
-                (identifier)
-                (identifier)))))
-        (application_expression
-          (identifier)
-          (identifier)))
-      (binary_expression
-        (application_expression
-          (identifier)
-          (identifier))
-        (identifier)))))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Comparison operators
@@ -159,8 +135,10 @@ x == y
 
 (source_file
   (binary_expression
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 List cons operator
@@ -172,8 +150,10 @@ x <> xs
 
 (source_file
   (binary_expression
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Unary operators
@@ -188,9 +168,12 @@ not x
 (source_file
   (application_expression
     (unary_expression
-      (identifier))
+      (name
+        (identifier)))
     (unary_expression
       (application_expression
-        (identifier)
+        (name
+          (identifier))
         (tilde_expression
-          (identifier))))))
+          (name
+            (identifier)))))))

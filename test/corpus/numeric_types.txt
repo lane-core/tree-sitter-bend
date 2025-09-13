@@ -115,22 +115,26 @@ def c: Char = 'a'
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     type: (numeric_type)
     value: (literal
       (integer_literal)))
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     type: (numeric_type)
     value: (literal
       (integer_literal)))
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     type: (numeric_type)
     value: (literal
       (float_literal)))
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     type: (numeric_type)
     value: (literal
       (character_literal))))

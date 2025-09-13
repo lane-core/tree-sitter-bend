@@ -13,14 +13,16 @@ def pred(n: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
     return_type: (natural_type)
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (literal
@@ -33,7 +35,8 @@ def pred(n: Nat) -> Nat:
             (nat_literal)
             (pattern
               (identifier))))
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 Double successor pattern
@@ -52,14 +55,16 @@ def div2(n: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
     return_type: (natural_type)
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (literal
@@ -82,8 +87,10 @@ def div2(n: Nat) -> Nat:
           (literal
             (nat_literal))
           (application_expression
-            (identifier)
-            (identifier)))))))
+            function: (name
+              (identifier))
+            (name
+              (identifier))))))))
 
 ================================================================================
 Successor in expression context
@@ -100,14 +107,16 @@ def mul2(n: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
     return_type: (natural_type)
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (literal
@@ -124,8 +133,10 @@ def mul2(n: Nat) -> Nat:
           (literal
             (nat_literal))
           (application_expression
-            (identifier)
-            (identifier)))))))
+            function: (name
+              (identifier))
+            (name
+              (identifier))))))))
 
 ================================================================================
 Complex arithmetic patterns
@@ -144,14 +155,16 @@ def complex(n: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
     return_type: (natural_type)
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (literal
@@ -182,5 +195,7 @@ def complex(n: Nat) -> Nat:
           (literal
             (nat_literal))
           (application_expression
-            (identifier)
-            (identifier)))))))
+            function: (name
+              (identifier))
+            (name
+              (identifier))))))))

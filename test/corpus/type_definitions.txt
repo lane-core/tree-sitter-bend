@@ -43,13 +43,16 @@ type List<A: Set>:
         (identifier))
       (field_declaration
         (identifier)
-        (identifier))
+        (name
+          (identifier)))
       (ERROR)
       (field_declaration
         (identifier)
         (type_application
-          (identifier)
-          (identifier))))))
+          (name
+            (identifier))
+          (name
+            (identifier)))))))
 
 ================================================================================
 Type with multiple type parameters
@@ -73,8 +76,10 @@ type Pair<A, B>:
         (identifier))
       (field_declaration
         (identifier)
-        (identifier))
+        (name
+          (identifier)))
       (ERROR)
       (field_declaration
         (identifier)
-        (identifier)))))
+        (name
+          (identifier))))))

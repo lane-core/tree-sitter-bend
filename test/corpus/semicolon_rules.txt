@@ -12,7 +12,8 @@ x = 42; x + 1
     (literal
       (integer_literal))
     (binary_expression
-      (identifier)
+      (name
+        (identifier))
       (literal
         (integer_literal)))))
 
@@ -28,8 +29,10 @@ Required semicolon in eliminator cases
   (lambda_expression
     (lambda_match_case
       (bool_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Optional semicolon in brace-form match
@@ -42,21 +45,25 @@ match x { case @A: body; case @B: body }
 (source_file
   (ERROR
     (implicit_application
-      (identifier)
+      (name
+        (identifier))
       (application_expression
         (application_expression
           (application_expression
             (application_expression
-              (identifier)
+              (name
+                (identifier))
               (constructor_tag
                 (identifier)))
             (ERROR)
-            (identifier))
+            (name
+              (identifier)))
           (ERROR)
           (constructor_tag
             (identifier)))
         (ERROR)
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 No semicolon in colon-form match
@@ -70,17 +77,20 @@ match x:
 
 (source_file
   (match_expression
-    (identifier)
-    (match_case
-      (pattern
-        (constructor_tag
-          (identifier)))
+    (name
       (identifier))
     (match_case
       (pattern
         (constructor_tag
           (identifier)))
-      (identifier))))
+      (name
+        (identifier)))
+    (match_case
+      (pattern
+        (constructor_tag
+          (identifier)))
+      (name
+        (identifier)))))
 
 ================================================================================
 Optional final semicolon in eliminator
@@ -94,8 +104,10 @@ Optional final semicolon in eliminator
   (lambda_expression
     (lambda_match_case
       (bool_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Multiple assignments with semicolons
@@ -115,5 +127,7 @@ x = 1; y = 2; x + y
       (literal
         (integer_literal))
       (binary_expression
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))

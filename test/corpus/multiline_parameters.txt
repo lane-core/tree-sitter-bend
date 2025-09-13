@@ -17,7 +17,8 @@ def app
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -27,31 +28,44 @@ def app
         (type_universe))
       (parameter
         (identifier)
-        (identifier))
-      (parameter
-        (identifier)
-        (identifier))
-      (parameter
-        (identifier)
-        (function_type
-          (identifier)
+        (name
           (identifier)))
       (parameter
         (identifier)
-        (equality_type
-          (identifier)
-          (identifier)
-          (identifier))))
-    return_type: (equality_type
-      (identifier)
-      (application_expression
+        (name
+          (identifier)))
+      (parameter
         (identifier)
+        (function_type
+          (name
+            (identifier))
+          (name
+            (identifier))))
+      (parameter
+        (identifier)
+        (equality_type
+          (name
+            (identifier))
+          (name
+            (identifier))
+          (name
+            (identifier)))))
+    return_type: (equality_type
+      (name
         (identifier))
       (application_expression
-        (identifier)
-        (identifier)))
+        function: (name
+          (identifier))
+        (name
+          (identifier)))
+      (application_expression
+        function: (name
+          (identifier))
+        (name
+          (identifier))))
     body: (rewrite_expression
-      (identifier)
+      (name
+        (identifier))
       (reflexivity_proof))))
 
 ================================================================================
@@ -63,7 +77,7 @@ def fold
   , B: A -> Set
   , P: Set
   , w: W(A, B)
-  , F: all x:A k:(B(x) -> P) . P
+  , F: A -> P
   ) -> P:
   body
 
@@ -71,7 +85,8 @@ def fold
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -79,7 +94,8 @@ def fold
       (parameter
         (identifier)
         (function_type
-          (identifier)
+          (name
+            (identifier))
           (type_universe)))
       (parameter
         (identifier)
@@ -87,24 +103,23 @@ def fold
       (parameter
         (identifier)
         (type_application
-          (identifier)
-          (identifier)
-          (identifier)))
+          (name
+            (identifier))
+          (name
+            (identifier))
+          (name
+            (identifier))))
       (parameter
         (identifier)
         (function_type
-          (identifier)
-          (ERROR
+          (name
             (identifier))
-          (function_type
-            (type_application
-              (identifier)
-              (identifier))
-            (identifier))
-          (ERROR)
-          (identifier))))
-    return_type: (identifier)
-    body: (identifier)))
+          (name
+            (identifier)))))
+    return_type: (name
+      (identifier))
+    body: (name
+      (identifier))))
 
 ================================================================================
 Zero-argument function with parentheses
@@ -117,7 +132,8 @@ def main() -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters)
     return_type: (natural_type)
     body: (literal
@@ -138,7 +154,8 @@ def complex<T, U>
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     (type_parameters
       (type_parameter
         (identifier))
@@ -148,15 +165,21 @@ def complex<T, U>
       (parameter
         (identifier)
         (function_type
-          (identifier)
-          (identifier)))
+          (name
+            (identifier))
+          (name
+            (identifier))))
       (parameter
         (identifier)
         (list_type
-          (identifier)))
+          (name
+            (identifier))))
       (parameter
         (identifier)
-        (identifier)))
+        (name
+          (identifier))))
     return_type: (list_type
-      (identifier))
-    body: (identifier)))
+      (name
+        (identifier)))
+    body: (name
+      (identifier))))

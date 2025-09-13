@@ -9,13 +9,15 @@ Constructor tag and application
 
 (source_file
   (application_expression
-    (constructor_tag
+    function: (constructor_tag
       (identifier))
-    (implicit_application
+    argument: (implicit_application
       (constructor_tag
         (identifier))
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Enum symbols
@@ -66,8 +68,10 @@ Superposition
   (implicit_application
     (enum_symbol
       (identifier))
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Fork expression
@@ -79,10 +83,14 @@ fork L:a elif:b else:c
 
 (source_file
   (fork_expression
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Trust expression
@@ -94,7 +102,8 @@ trust dangerous_op
 
 (source_file
   (trust_expression
-    (identifier)))
+    (name
+      (identifier))))
 
 ================================================================================
 Tilde match
@@ -109,20 +118,25 @@ Tilde match
 
 (source_file
   (tilde_match
-    (identifier)
+    (name
+      (identifier))
     (constructor_tag
       (identifier))
     (application_expression
       function: (application_expression
-        function: (identifier)
+        function: (name
+          (identifier))
         argument: (implicit_application
           (constructor_tag
             (identifier))
-          (identifier)))
+          (name
+            (identifier))))
       (ERROR)
       argument: (application_expression
-        (identifier)
-        (identifier)))))
+        function: (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Let expression
@@ -138,7 +152,8 @@ x = 5; x + 1
     (literal
       (integer_literal))
     (binary_expression
-      (identifier)
+      (name
+        (identifier))
       (literal
         (integer_literal)))))
 
@@ -152,7 +167,8 @@ x :: Nat
 
 (source_file
   (type_check
-    (identifier)
+    (name
+      (identifier))
     (natural_type)))
 
 ================================================================================

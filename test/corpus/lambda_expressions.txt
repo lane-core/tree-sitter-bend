@@ -10,7 +10,8 @@ lambda x. x + 1
   (lambda_expression
     (identifier)
     (binary_expression
-      (identifier)
+      (name
+        (identifier))
       (literal
         (integer_literal)))))
 
@@ -27,8 +28,10 @@ Lambda with multiple parameters
     (identifier)
     (identifier)
     (binary_expression
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Lambda match for booleans
@@ -42,8 +45,10 @@ Lambda match for booleans
   (lambda_expression
     (lambda_match_case
       (bool_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Lambda match for unit
@@ -57,7 +62,8 @@ Lambda match for unit
   (lambda_expression
     (lambda_match_case
       (unit_match
-        (identifier)))))
+        (name
+          (identifier))))))
 
 ================================================================================
 Lambda match for lists
@@ -74,8 +80,10 @@ Lambda match for lists
   (lambda_expression
     (lambda_match_case
       (list_match
-        (identifier)
-        (identifier)))))
+        (name
+          (identifier))
+        (name
+          (identifier))))))
 
 ================================================================================
 Fixed point expression
@@ -91,5 +99,7 @@ Fixed point expression
     (lambda_expression
       (identifier)
       (application_expression
-        (identifier)
-        (identifier)))))
+        function: (name
+          (identifier))
+        (name
+          (identifier))))))

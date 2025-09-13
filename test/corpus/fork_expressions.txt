@@ -8,9 +8,12 @@ fork L: a else: b
 
 (source_file
   (fork_expression
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Fork with elif
@@ -22,10 +25,14 @@ fork L: a elif: b else: c
 
 (source_file
   (fork_expression
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Fork with multiple elifs
@@ -37,12 +44,18 @@ fork L: a elif: b elif: c elif: d else: e
 
 (source_file
   (fork_expression
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))
+    (name
+      (identifier))))
 
 ================================================================================
 Fork with complex expressions
@@ -59,11 +72,17 @@ else:
 
 (source_file
   (fork_expression
-    (identifier)
-    (application_expression
-      (identifier)
+    (name
       (identifier))
     (application_expression
-      (identifier)
-      (identifier))
-    (identifier)))
+      function: (name
+        (identifier))
+      (name
+        (identifier)))
+    (application_expression
+      function: (name
+        (identifier))
+      (name
+        (identifier)))
+    (name
+      (identifier))))

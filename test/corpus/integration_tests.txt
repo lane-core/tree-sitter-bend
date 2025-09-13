@@ -13,7 +13,8 @@ def map<A,B>(f: A -> B, xs: A[]) -> B[]:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     (type_parameters
       (type_parameter
         (identifier))
@@ -23,16 +24,21 @@ def map<A,B>(f: A -> B, xs: A[]) -> B[]:
       (parameter
         (identifier)
         (function_type
-          (identifier)
-          (identifier)))
+          (name
+            (identifier))
+          (name
+            (identifier))))
       (parameter
         (identifier)
         (list_type
-          (identifier))))
+          (name
+            (identifier)))))
     return_type: (list_type
-      (identifier))
+      (name
+        (identifier)))
     body: (match_expression
-      (identifier)
+      (name
+        (identifier))
       (match_case
         (pattern
           (list_pattern))
@@ -46,14 +52,21 @@ def map<A,B>(f: A -> B, xs: A[]) -> B[]:
               (identifier))))
         (binary_expression
           (application_expression
-            (identifier)
-            (identifier))
+            function: (name
+              (identifier))
+            (name
+              (identifier)))
           (application_expression
-            (identifier)
-            (identifier)
-            (identifier)
-            (identifier)
-            (identifier)))))))
+            function: (name
+              (identifier))
+            (name
+              (identifier))
+            (name
+              (identifier))
+            (name
+              (identifier))
+            (name
+              (identifier))))))))
 
 ================================================================================
 Type definition with dependent equality constraints
@@ -90,7 +103,8 @@ type Vec<A: Set>(N: Nat) -> Set:
         (identifier)
         (equality_type
           (natural_type)
-          (identifier)
+          (name
+            (identifier))
           (literal
             (nat_literal)))))
     (constructor_case
@@ -101,22 +115,28 @@ type Vec<A: Set>(N: Nat) -> Set:
         (natural_type))
       (field_declaration
         (identifier)
-        (identifier))
+        (name
+          (identifier)))
       (field_declaration
         (identifier)
         (type_application
-          (identifier)
-          (identifier)
-          (identifier)))
+          (name
+            (identifier))
+          (name
+            (identifier))
+          (name
+            (identifier))))
       (field_declaration
         (identifier)
         (equality_type
           (natural_type)
-          (identifier)
+          (name
+            (identifier))
           (binary_expression
             (literal
               (nat_literal))
-            (identifier)))))))
+            (name
+              (identifier))))))))
 
 ================================================================================
 Complex expression with lambda, match, and operators
@@ -132,7 +152,8 @@ def complex(n: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -151,16 +172,20 @@ def complex(n: Nat) -> Nat:
                 (literal
                   (integer_literal))
                 (application_expression
-                  (identifier)
-                  (identifier)))))))
+                  function: (name
+                    (identifier))
+                  (name
+                    (identifier))))))))
       (match_expression
-        (identifier)
+        (name
+          (identifier))
         (match_case
           (pattern
             (literal
               (nat_literal)))
           (application_expression
-            (identifier)
+            function: (name
+              (identifier))
             (literal
               (nat_literal))))
         (match_case
@@ -171,14 +196,18 @@ def complex(n: Nat) -> Nat:
                 (identifier))))
           (binary_expression
             (application_expression
-              (identifier)
+              function: (name
+                (identifier))
               (binary_expression
                 (literal
                   (nat_literal))
-                (identifier)))
+                (name
+                  (identifier))))
             (application_expression
-              (identifier)
-              (identifier))))))))
+              function: (name
+                (identifier))
+              (name
+                (identifier)))))))))
 
 ================================================================================
 Proof term with rewrite and equality
@@ -191,7 +220,8 @@ def proof(a: Nat, b: Nat, e: Nat{a == b}) -> Nat{b == a}:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -203,12 +233,17 @@ def proof(a: Nat, b: Nat, e: Nat{a == b}) -> Nat{b == a}:
         (identifier)
         (equality_type
           (natural_type)
-          (identifier)
-          (identifier))))
+          (name
+            (identifier))
+          (name
+            (identifier)))))
     return_type: (equality_type
       (natural_type)
-      (identifier)
-      (identifier))
+      (name
+        (identifier))
+      (name
+        (identifier)))
     body: (rewrite_expression
-      (identifier)
+      (name
+        (identifier))
       (reflexivity_proof))))

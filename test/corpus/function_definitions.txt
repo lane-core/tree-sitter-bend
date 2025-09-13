@@ -9,7 +9,8 @@ def add(x: Nat, y: Nat) -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -19,8 +20,10 @@ def add(x: Nat, y: Nat) -> Nat:
         (natural_type)))
     return_type: (natural_type)
     body: (binary_expression
-      (identifier)
-      (identifier))))
+      (name
+        (identifier))
+      (name
+        (identifier)))))
 
 ================================================================================
 Function with type parameters
@@ -33,16 +36,20 @@ def id<A>(x: A) -> A:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     (type_parameters
       (type_parameter
         (identifier)))
     parameters: (parameters
       (parameter
         (identifier)
-        (identifier)))
-    return_type: (identifier)
-    body: (identifier)))
+        (name
+          (identifier))))
+    return_type: (name
+      (identifier))
+    body: (name
+      (identifier))))
 
 ================================================================================
 Zero-argument function
@@ -55,7 +62,8 @@ def get_zero() -> Nat:
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters)
     return_type: (natural_type)
     body: (literal
@@ -71,7 +79,8 @@ def PI: F64 = 3.14159
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     type: (numeric_type)
     value: (literal
       (float_literal))))
@@ -91,7 +100,8 @@ def complex
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
@@ -105,9 +115,12 @@ def complex
     return_type: (natural_type)
     body: (binary_expression
       (binary_expression
-        (identifier)
-        (identifier))
-      (identifier))))
+        (name
+          (identifier))
+        (name
+          (identifier)))
+      (name
+        (identifier)))))
 
 ================================================================================
 Function without return type annotation
@@ -120,9 +133,11 @@ def simple(x: Nat):
 
 (source_file
   (function_definition
-    name: (identifier)
+    name: (name
+      (identifier))
     parameters: (parameters
       (parameter
         (identifier)
         (natural_type)))
-    body: (identifier)))
+    body: (name
+      (identifier))))
