@@ -42,10 +42,6 @@ module.exports = grammar({
   conflicts: $ => [
     // Essential dependent type ambiguities (necessary for dependent types)
     [$._type, $._expression],
-    [$._type, $._expression, $.let_expression], 
-    [$._type, $.name],
-    [$._type, $.let_expression, $.name],
-    [$._type, $.hierarchical_name, $.name],
     [$.function_definition, $._expression],
     
     // Application conflicts (context-dependent disambiguation needed)
