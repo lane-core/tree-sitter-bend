@@ -3476,37 +3476,41 @@
       ]
     },
     "superposition": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "&"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
+      "type": "PREC",
+      "value": 21,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "&"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "{"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": ","
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "}"
+          }
+        ]
+      }
     },
     "log_expression": {
       "type": "SEQ",
@@ -4586,10 +4590,6 @@
       "assignment_statement"
     ],
     [
-      "function_type",
-      "sigma_simple"
-    ],
-    [
       "arithmetic_pattern",
       "list_pattern"
     ],
@@ -4619,15 +4619,6 @@
     [
       "type_application",
       "application_expression"
-    ],
-    [
-      "implicit_application",
-      "binary_expression",
-      "superposition"
-    ],
-    [
-      "implicit_application",
-      "superposition"
     ],
     [
       "implicit_application",

@@ -53,9 +53,6 @@ module.exports = grammar({
     // Let expressions (necessary for context-dependent parsing)
     [$.let_expression, $.assignment_statement],
     
-    // Dependent pair/function type disambiguation
-    [$.function_type, $.sigma_simple],
-    
     // Pattern conflicts
     [$.arithmetic_pattern, $.list_pattern],
     [$.as_pattern, $.arithmetic_pattern],
@@ -69,8 +66,6 @@ module.exports = grammar({
     [$.lambda_match, $.lambda_match_case],
     [$.enum_match],
     [$.type_application, $.application_expression],
-    [$.implicit_application, $.binary_expression, $.superposition],
-    [$.implicit_application, $.superposition],
     [$.implicit_application, $.tilde_match],
     [$.enum_type, $.enum_literal],
     [$.list_type, $.metavar],
@@ -804,7 +799,7 @@ module.exports = grammar({
     // ============================================================================
 
     // Sup constructor - &L{a,b}
-    superposition: $ => seq(
+    superposition: $ => prec(PREC.TIGHT_POSTFIX + 1, seq(
       '&',
       $._expression,
       '{',
@@ -812,7 +807,7 @@ module.exports = grammar({
       ',',
       $._expression,
       '}',
-    ),
+    )),
 
     // Log constructor
     log_expression: $ => seq(
